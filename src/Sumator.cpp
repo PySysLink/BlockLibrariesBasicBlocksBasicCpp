@@ -42,9 +42,11 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     std::vector<double> Sumator::CalculateOutputs(const std::vector<double> inputs, BlockTypes::BasicCpp::SampleTime sampleTime)
     {
         double sumation = 0;
-        for (int i; i < this->gains.size(); i++)
+        std::cout << "Start sumation..." << std::endl;
+        for (int i = 0; i < this->gains.size(); i++)
         {
             sumation += inputs[i] * this->gains[i];
+            std::cout << "Sumation: " << sumation << std::endl;
         }
         return {sumation};
     }

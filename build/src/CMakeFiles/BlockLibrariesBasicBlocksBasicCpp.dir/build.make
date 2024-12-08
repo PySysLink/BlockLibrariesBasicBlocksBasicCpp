@@ -125,10 +125,24 @@ src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/BasicCppFactory.cpp.s: cmak
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/BasicCppFactory.cpp.s"
 	cd /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/BasicCppFactory.cpp -o CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/BasicCppFactory.cpp.s
 
+src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Acumulator.cpp.o: src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/flags.make
+src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Acumulator.cpp.o: /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/Acumulator.cpp
+src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Acumulator.cpp.o: src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Acumulator.cpp.o"
+	cd /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Acumulator.cpp.o -MF CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Acumulator.cpp.o.d -o CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Acumulator.cpp.o -c /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/Acumulator.cpp
+
+src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Acumulator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Acumulator.cpp.i"
+	cd /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/Acumulator.cpp > CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Acumulator.cpp.i
+
+src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Acumulator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Acumulator.cpp.s"
+	cd /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/Acumulator.cpp -o CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Acumulator.cpp.s
+
 src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/RegisterBasicCppFactories.cpp.o: src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/flags.make
 src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/RegisterBasicCppFactories.cpp.o: /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/RegisterBasicCppFactories.cpp
 src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/RegisterBasicCppFactories.cpp.o: src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/RegisterBasicCppFactories.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/RegisterBasicCppFactories.cpp.o"
 	cd /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/RegisterBasicCppFactories.cpp.o -MF CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/RegisterBasicCppFactories.cpp.o.d -o CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/RegisterBasicCppFactories.cpp.o -c /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/RegisterBasicCppFactories.cpp
 
 src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/RegisterBasicCppFactories.cpp.i: cmake_force
@@ -145,6 +159,7 @@ BlockLibrariesBasicBlocksBasicCpp_OBJECTS = \
 "CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Display.cpp.o" \
 "CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Sumator.cpp.o" \
 "CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/BasicCppFactory.cpp.o" \
+"CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Acumulator.cpp.o" \
 "CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/RegisterBasicCppFactories.cpp.o"
 
 # External object files for target BlockLibrariesBasicBlocksBasicCpp
@@ -154,10 +169,11 @@ src/libBlockLibrariesBasicBlocksBasicCpp.so: src/CMakeFiles/BlockLibrariesBasicB
 src/libBlockLibrariesBasicBlocksBasicCpp.so: src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Display.cpp.o
 src/libBlockLibrariesBasicBlocksBasicCpp.so: src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Sumator.cpp.o
 src/libBlockLibrariesBasicBlocksBasicCpp.so: src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/BasicCppFactory.cpp.o
+src/libBlockLibrariesBasicBlocksBasicCpp.so: src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Acumulator.cpp.o
 src/libBlockLibrariesBasicBlocksBasicCpp.so: src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/RegisterBasicCppFactories.cpp.o
 src/libBlockLibrariesBasicBlocksBasicCpp.so: src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/build.make
 src/libBlockLibrariesBasicBlocksBasicCpp.so: src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX shared library libBlockLibrariesBasicBlocksBasicCpp.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX shared library libBlockLibrariesBasicBlocksBasicCpp.so"
 	cd /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -175,6 +175,30 @@ BlockLibrariesBasicBlocksBasicCpp/fast:
 	cd /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/build.make src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/build
 .PHONY : BlockLibrariesBasicBlocksBasicCpp/fast
 
+Acumulator.o: Acumulator.cpp.o
+.PHONY : Acumulator.o
+
+# target to build an object file
+Acumulator.cpp.o:
+	cd /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/build.make src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Acumulator.cpp.o
+.PHONY : Acumulator.cpp.o
+
+Acumulator.i: Acumulator.cpp.i
+.PHONY : Acumulator.i
+
+# target to preprocess a source file
+Acumulator.cpp.i:
+	cd /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/build.make src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Acumulator.cpp.i
+.PHONY : Acumulator.cpp.i
+
+Acumulator.s: Acumulator.cpp.s
+.PHONY : Acumulator.s
+
+# target to generate assembly for a file
+Acumulator.cpp.s:
+	cd /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/build.make src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/Acumulator.cpp.s
+.PHONY : Acumulator.cpp.s
+
 BasicCppFactory.o: BasicCppFactory.cpp.o
 .PHONY : BasicCppFactory.o
 
@@ -308,6 +332,9 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... BlockLibrariesBasicBlocksBasicCpp"
+	@echo "... Acumulator.o"
+	@echo "... Acumulator.i"
+	@echo "... Acumulator.s"
 	@echo "... BasicCppFactory.o"
 	@echo "... BasicCppFactory.i"
 	@echo "... BasicCppFactory.s"

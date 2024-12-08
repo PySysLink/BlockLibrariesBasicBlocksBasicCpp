@@ -4,6 +4,7 @@ add_library(BlockLibrariesBasicBlocksBasicCpp SHARED
     Display.cpp
     Sumator.cpp 
     BasicCppFactory.cpp
+    Acumulator.cpp
     RegisterBasicCppFactories.cpp
 )
 

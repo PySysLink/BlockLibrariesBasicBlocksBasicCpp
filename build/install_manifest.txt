@@ -1,4 +1,5 @@
 /usr/local/include/BlockLibraries/BasicBlocksBasicCpp/Sumator.h
+/usr/local/include/BlockLibraries/BasicBlocksBasicCpp/Acumulator.h
 /usr/local/include/BlockLibraries/BasicBlocksBasicCpp/Display.h
 /usr/local/include/BlockLibraries/BasicBlocksBasicCpp/BasicCppFactory.h
 /usr/local/include/BlockLibraries/BasicBlocksBasicCpp/Constant.h

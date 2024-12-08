@@ -2,6 +2,7 @@
 #include "Constant.h"
 #include "Sumator.h"
 #include "Display.h"
+#include "Acumulator.h"
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
@@ -9,6 +10,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     {
         return {"BasicBlocks/Constant",
                 "BasicBlocks/Sumator",
+                "BasicBlocks/Acumulator",
                 "BasicBlocks/Display"};
     }
 
@@ -27,6 +29,11 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         else if (blockClass == "BasicBlocks/Display")
         {
             std::unique_ptr<BlockTypes::BasicCpp::SimulationBlock> simulationBlock = std::make_unique<BlockLibraries::BasicBlocksBasicCpp::Display>(blockConfiguration);
+            return std::move(simulationBlock);
+        }
+        else if (blockClass == "BasicBlocks/Acumulator")
+        {
+            std::unique_ptr<BlockTypes::BasicCpp::SimulationBlock> simulationBlock = std::make_unique<BlockLibraries::BasicBlocksBasicCpp::Acumulator>(blockConfiguration);
             return std::move(simulationBlock);
         }
         else 
