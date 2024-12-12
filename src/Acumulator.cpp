@@ -13,16 +13,15 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         {
             this->value = 0;
         }
-        this->sampleTime = BlockTypes::BasicCpp::ConfigurationValueManager::TryGetConfigurationValue<double>("SampleTime", configurationValues);
+        this->sampleTimeValue = BlockTypes::BasicCpp::ConfigurationValueManager::TryGetConfigurationValue<double>("SampleTime", configurationValues);
 
-        this->sampleTimes.push_back(BlockTypes::BasicCpp::SampleTime(BlockTypes::BasicCpp::SampleTimeType::discrete, this->sampleTime));    
-        std::cout << "Sample time account: " << this->sampleTimes.size() << std::endl;
+        this->sampleTime = std::make_shared<BlockTypes::BasicCpp::SampleTime>(BlockTypes::BasicCpp::SampleTimeType::discrete, this->sampleTimeValue);    
 
     }
 
-    const std::vector<BlockTypes::BasicCpp::SampleTime>& Acumulator::GetSampleTimes() const
+    const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> Acumulator::GetSampleTime() const
     {
-        return this->sampleTimes;
+        return this->sampleTime;
     }
 
     const int Acumulator::GetInputPortAmmount() const
@@ -40,7 +39,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         return result;
     }
 
-    std::vector<double> Acumulator::CalculateOutputs(const std::vector<double> inputs, BlockTypes::BasicCpp::SampleTime sampleTime)
+    std::vector<double> Acumulator::CalculateOutputs(const std::vector<double> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime)
     {
         double value_no_updated = this->value;
         this->value += inputs[0];

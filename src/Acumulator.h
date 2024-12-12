@@ -10,17 +10,17 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     class Acumulator : public BlockTypes::BasicCpp::SimulationBlock
     {
         private:
-            std::vector<BlockTypes::BasicCpp::SampleTime> sampleTimes;
+            std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime;
             float value;
-            double sampleTime;
+            double sampleTimeValue;
         public:
             Acumulator(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues);
-            const std::vector<BlockTypes::BasicCpp::SampleTime>& GetSampleTimes() const;
+            const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> GetSampleTime() const;
             const int GetInputPortAmmount() const;
             const int GetOutputPortAmmount() const;
             const std::vector<bool> InputsHasDirectFeedthrough() const;
 
-            std::vector<double> CalculateOutputs(const std::vector<double> inputs, BlockTypes::BasicCpp::SampleTime sampleTime);
+            std::vector<double> CalculateOutputs(const std::vector<double> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime);
     };
 } // namespace BasicBlocks
 

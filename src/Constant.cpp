@@ -8,12 +8,12 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     {
         this->value = BlockTypes::BasicCpp::ConfigurationValueManager::TryGetConfigurationValue<double>("Value", configurationValues);
 
-        this->sampleTimes.push_back(BlockTypes::BasicCpp::SampleTime(BlockTypes::BasicCpp::SampleTimeType::constant));
+        this->sampleTime = std::make_shared<BlockTypes::BasicCpp::SampleTime>(BlockTypes::BasicCpp::SampleTimeType::constant);
     }
 
-    const std::vector<BlockTypes::BasicCpp::SampleTime>& Constant::GetSampleTimes() const
+    const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> Constant::GetSampleTime() const
     {
-        return this->sampleTimes;
+        return this->sampleTime;
     }
 
     const int Constant::GetInputPortAmmount() const
@@ -30,7 +30,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         return {};
     }
 
-    std::vector<double> Constant::CalculateOutputs(const std::vector<double> inputs, BlockTypes::BasicCpp::SampleTime sampleTime)
+    std::vector<double> Constant::CalculateOutputs(const std::vector<double> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime)
     {
         return {this->value};
     }
