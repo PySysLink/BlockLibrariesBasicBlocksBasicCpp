@@ -12,7 +12,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         private:
             std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime;
         public:
-            Display(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues);
+            Display(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler);
             const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> GetSampleTime() const;
             const int GetInputPortAmmount() const;
             const int GetOutputPortAmmount() const;

@@ -1,9 +1,8 @@
 #include "Acumulator.h"
-#include <iostream>
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
-    Acumulator::Acumulator(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues) : BlockTypes::BasicCpp::SimulationBlock(configurationValues)
+    Acumulator::Acumulator(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler) : BlockTypes::BasicCpp::SimulationBlock(configurationValues, eventHandler)
     {
         try
         {

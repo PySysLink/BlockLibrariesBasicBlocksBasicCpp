@@ -162,6 +162,7 @@ src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/RegisterBasicCppFactories.c
  /usr/include/c++/11/variant \
  /usr/include/c++/11/bits/enable_special_members.h \
  /usr/include/c++/11/bits/parse_numbers.h /usr/include/c++/11/stdexcept \
+ /usr/local/include/BlockTypes/BasicCpp/IEventHandler.h \
  /usr/local/include/BlockTypes/BasicCpp/SampleTime.h \
  /usr/include/c++/11/cmath /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/math-vector.h \

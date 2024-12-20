@@ -1,10 +1,9 @@
 #include "Display.h"
 #include <vector>
-#include <iostream>
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
-    Display::Display(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues) : BlockTypes::BasicCpp::SimulationBlock(configurationValues)
+    Display::Display(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler) : BlockTypes::BasicCpp::SimulationBlock(configurationValues, eventHandler)
     {
         this->sampleTime = std::make_shared<BlockTypes::BasicCpp::SampleTime>(BlockTypes::BasicCpp::SampleTimeType::inherited, 
                                                                      std::vector<BlockTypes::BasicCpp::SampleTimeType>{BlockTypes::BasicCpp::SampleTimeType::constant,
@@ -33,7 +32,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
 
     std::vector<double> Display::CalculateOutputs(const std::vector<double> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime)
     {
-        std::cout << "Display value: " << inputs[0] << std::endl;
+        this->eventHandler->NotifyNewValueEvent(0.0, "DisplayValue", inputs[0]);
         return {};
     }  
 } // namespace BlockLibraries::BasicBlocks

@@ -4,7 +4,7 @@
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
-    Constant::Constant(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues) : BlockTypes::BasicCpp::SimulationBlock(configurationValues)
+    Constant::Constant(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler) : BlockTypes::BasicCpp::SimulationBlock(configurationValues, eventHandler)
     {
         this->value = BlockTypes::BasicCpp::ConfigurationValueManager::TryGetConfigurationValue<double>("Value", configurationValues);
 

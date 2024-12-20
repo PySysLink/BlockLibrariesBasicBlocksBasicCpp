@@ -14,7 +14,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
             std::vector<double> gains;
             std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime;
         public:
-            Sumator(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues);
+            Sumator(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler);
             const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> GetSampleTime() const;
             const int GetInputPortAmmount() const;
             const int GetOutputPortAmmount() const;
