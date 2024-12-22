@@ -46,5 +46,22 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         return {sumation};
     }
 
+    bool Sumator::TryUpdateConfigurationValue(std::string keyName, BlockTypes::BasicCpp::ConfigurationValue value)
+    {
+        if (keyName == "Gains")
+        {
+            try
+            {
+                this->gains = std::get<std::vector<double>>(value);
+                return true;
+            }
+            catch(std::bad_variant_access)
+            {
+                return false;
+            }
+        }
+        else {return false;}
+    }
+
 } // namespace BlockLibraries::BasicBlocks
 

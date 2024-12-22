@@ -20,6 +20,8 @@ namespace BlockLibraries::BasicBlocksBasicCpp
             const std::vector<bool> InputsHasDirectFeedthrough() const;
 
             std::vector<double> CalculateOutputs(const std::vector<double> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime);
+
+            bool TryUpdateConfigurationValue(std::string keyName, BlockTypes::BasicCpp::ConfigurationValue value) override;
     };
 } // namespace BasicBlocks
 

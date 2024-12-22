@@ -35,5 +35,22 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         return {this->value};
     }
 
+    bool Constant::TryUpdateConfigurationValue(std::string keyName, BlockTypes::BasicCpp::ConfigurationValue value)
+    {
+        if (keyName == "Value")
+        {
+            try
+            {
+                this->value = std::get<double>(value);
+                return true;
+            }
+            catch(std::bad_variant_access)
+            {
+                return false;
+            }
+        }
+        else {return false;}
+    }
+
 } // namespace BlockLibraries::BasicBlocks
 
