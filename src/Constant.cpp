@@ -30,7 +30,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         return {};
     }
 
-    std::vector<double> Constant::CalculateOutputs(const std::vector<double> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime)
+    std::vector<double> Constant::CalculateOutputs(const std::vector<double> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime)
     {
         return {this->value};
     }

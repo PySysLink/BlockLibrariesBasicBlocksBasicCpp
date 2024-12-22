@@ -30,9 +30,9 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         return {false};
     }
 
-    std::vector<double> Display::CalculateOutputs(const std::vector<double> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime)
+    std::vector<double> Display::CalculateOutputs(const std::vector<double> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime)
     {
-        this->eventHandler->NotifyNewValueEvent(0.0, "DisplayValue", inputs[0]);
+        this->eventHandler->NotifyNewValueEvent(currentTime, "DisplayValue", inputs[0]);
         return {};
     }  
 } // namespace BlockLibraries::BasicBlocks

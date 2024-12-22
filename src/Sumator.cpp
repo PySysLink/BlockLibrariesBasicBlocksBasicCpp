@@ -36,7 +36,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         return result;
     }
 
-    std::vector<double> Sumator::CalculateOutputs(const std::vector<double> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime)
+    std::vector<double> Sumator::CalculateOutputs(const std::vector<double> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime)
     {
         double sumation = 0;
         for (int i = 0; i < this->gains.size(); i++)

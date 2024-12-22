@@ -19,7 +19,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
             const int GetOutputPortAmmount() const;
             const std::vector<bool> InputsHasDirectFeedthrough() const;
 
-            std::vector<double> CalculateOutputs(const std::vector<double> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime);
+            std::vector<double> CalculateOutputs(const std::vector<double> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime);
 
             bool TryUpdateConfigurationValue(std::string keyName, BlockTypes::BasicCpp::ConfigurationValue value) override;
     };

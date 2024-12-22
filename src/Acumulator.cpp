@@ -38,7 +38,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         return result;
     }
 
-    std::vector<double> Acumulator::CalculateOutputs(const std::vector<double> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime)
+    std::vector<double> Acumulator::CalculateOutputs(const std::vector<double> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime)
     {
         double value_no_updated = this->value;
         this->value += inputs[0];
