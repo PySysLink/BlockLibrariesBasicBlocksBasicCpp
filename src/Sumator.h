@@ -8,10 +8,11 @@
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
-    class Sumator : public BlockTypes::BasicCpp::SimulationBlock
+    template <typename T>
+    class Sumator : public BlockTypes::BasicCpp::SimulationBlock<T>
     {
         private:
-            std::vector<double> gains;
+            std::vector<T> gains;
             std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime;
         public:
             Sumator(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler);
@@ -20,10 +21,13 @@ namespace BlockLibraries::BasicBlocksBasicCpp
             const int GetOutputPortAmmount() const;
             const std::vector<bool> InputsHasDirectFeedthrough() const;
 
-            std::vector<double> CalculateOutputs(const std::vector<double> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime);
+            std::vector<T> CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime);
 
             bool TryUpdateConfigurationValue(std::string keyName, BlockTypes::BasicCpp::ConfigurationValue value) override;
     };
+
+    extern template class Sumator<double>;
+    extern template class Sumator<std::complex<double>>;
 } // namespace BasicBlocks
 
 

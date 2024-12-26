@@ -2,7 +2,8 @@
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
-    Acumulator::Acumulator(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler) : BlockTypes::BasicCpp::SimulationBlock(configurationValues, eventHandler)
+    template <typename T>
+    Acumulator<T>::Acumulator(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler) : BlockTypes::BasicCpp::SimulationBlock<T>(configurationValues, eventHandler)
     {
         try
         {
@@ -18,32 +19,41 @@ namespace BlockLibraries::BasicBlocksBasicCpp
 
     }
 
-    const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> Acumulator::GetSampleTime() const
+    template <typename T>
+    const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> Acumulator<T>::GetSampleTime() const
     {
         return this->sampleTime;
     }
 
-    const int Acumulator::GetInputPortAmmount() const
-    {
-        return 1;
-    }
-    const int Acumulator::GetOutputPortAmmount() const
+    template <typename T>
+    const int Acumulator<T>::GetInputPortAmmount() const
     {
         return 1;
     }
 
-    const std::vector<bool> Acumulator::InputsHasDirectFeedthrough() const 
+    template <typename T>
+    const int Acumulator<T>::GetOutputPortAmmount() const
+    {
+        return 1;
+    }
+
+    template <typename T>
+    const std::vector<bool> Acumulator<T>::InputsHasDirectFeedthrough() const 
     {
         std::vector<bool> result = {false};
         return result;
     }
 
-    std::vector<double> Acumulator::CalculateOutputs(const std::vector<double> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime)
+    template <typename T>
+    std::vector<T> Acumulator<T>::CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime)
     {
-        double value_no_updated = this->value;
+        T value_no_updated = this->value;
         this->value += inputs[0];
         return {value_no_updated};
     }
+
+    template class Acumulator<double>;
+    template class Acumulator<std::complex<double>>;
 
 } // namespace BlockLibraries::BasicBlocks
 

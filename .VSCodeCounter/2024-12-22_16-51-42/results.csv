@@ -1,0 +1,31 @@
+"filename", "language", "cpp", "CMake", "CMake Cache", "comment", "blank", "total"
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/CMakeLists.txt", "CMake", 0, 65, 0, 0, 24, 89
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/BlockLibrariesBasicBlocksBasicCppConfig.cmake", "CMake", 0, 26, 0, 0, 8, 34
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeCache.txt", "CMake Cache", 0, 0, 330, 0, 77, 407
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeFiles/3.27.7/CMakeCCompiler.cmake", "CMake", 0, 57, 0, 0, 18, 75
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeFiles/3.27.7/CMakeCXXCompiler.cmake", "CMake", 0, 66, 0, 0, 20, 86
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeFiles/3.27.7/CMakeSystem.cmake", "CMake", 0, 10, 0, 0, 6, 16
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeFiles/3.27.7/CompilerIdCXX/CMakeCXXCompilerId.cpp", "cpp", 711, 0, 0, 0, 145, 856
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeFiles/CMakeDirectoryInformation.cmake", "CMake", 0, 12, 0, 0, 5, 17
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeFiles/Export/1bb197d122437d3908ced95dcb5513ea/BlockLibrariesBasicBlocksBasicCppTargets-noconfig.cmake", "CMake", 0, 15, 0, 0, 5, 20
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeFiles/Export/1bb197d122437d3908ced95dcb5513ea/BlockLibrariesBasicBlocksBasicCppTargets.cmake", "CMake", 0, 90, 0, 0, 13, 103
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeFiles/Makefile.cmake", "CMake", 0, 51, 0, 0, 6, 57
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/cmake_install.cmake", "CMake", 0, 115, 0, 0, 19, 134
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/DependInfo.cmake", "CMake", 0, 19, 0, 0, 6, 25
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/cmake_clean.cmake", "CMake", 0, 20, 0, 0, 2, 22
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/cmake_clean_target.cmake", "CMake", 0, 3, 0, 0, 1, 4
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/src/CMakeFiles/CMakeDirectoryInformation.cmake", "CMake", 0, 12, 0, 0, 5, 17
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/src/cmake_install.cmake", "CMake", 0, 37, 0, 0, 8, 45
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/Acumulator.cpp", "cpp", 40, 0, 0, 0, 10, 50
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/Acumulator.h", "cpp", 22, 0, 0, 0, 7, 29
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/BasicCppFactory.cpp", "cpp", 42, 0, 0, 0, 3, 45
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/BasicCppFactory.h", "cpp", 18, 0, 0, 0, 5, 23
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/CMakeLists.txt", "CMake", 0, 17, 0, 0, 3, 20
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/Constant.cpp", "cpp", 47, 0, 0, 0, 10, 57
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/Constant.h", "cpp", 23, 0, 0, 0, 6, 29
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/Display.cpp", "cpp", 33, 0, 0, 0, 7, 40
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/Display.h", "cpp", 20, 0, 0, 0, 7, 27
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/RegisterBasicCppFactories.cpp", "cpp", 5, 0, 0, 0, 3, 8
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/Sumator.cpp", "cpp", 58, 0, 0, 0, 10, 68
+"/home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/Sumator.h", "cpp", 25, 0, 0, 0, 9, 34
+"Total", "-", 1044, 615, 330, 0, 448, 2437

@@ -7,7 +7,8 @@
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
-    class Display : public BlockTypes::BasicCpp::SimulationBlock
+    template <typename T>
+    class Display : public BlockTypes::BasicCpp::SimulationBlock<T>
     {
         private:
             std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime;
@@ -18,8 +19,11 @@ namespace BlockLibraries::BasicBlocksBasicCpp
             const int GetOutputPortAmmount() const;
             const std::vector<bool> InputsHasDirectFeedthrough() const;
 
-            std::vector<double> CalculateOutputs(const std::vector<double> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime);
+            std::vector<T> CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime);
     };
+
+    extern template class Display<double>;
+    extern template class Display<std::complex<double>>;
 } // namespace BasicBlocksBasicCpp
 
 

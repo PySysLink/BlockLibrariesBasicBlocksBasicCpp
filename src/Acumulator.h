@@ -7,11 +7,12 @@
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
-    class Acumulator : public BlockTypes::BasicCpp::SimulationBlock
+    template <typename T>
+    class Acumulator : public BlockTypes::BasicCpp::SimulationBlock<T>
     {
         private:
             std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime;
-            float value;
+            T value;
             double sampleTimeValue;
         public:
             Acumulator(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler);
@@ -20,8 +21,11 @@ namespace BlockLibraries::BasicBlocksBasicCpp
             const int GetOutputPortAmmount() const;
             const std::vector<bool> InputsHasDirectFeedthrough() const;
 
-            std::vector<double> CalculateOutputs(const std::vector<double> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime);
+            std::vector<T> CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime);
     };
+
+    extern template class Acumulator<double>;
+    extern template class Acumulator<std::complex<double>>;
 } // namespace BasicBlocks
 
 

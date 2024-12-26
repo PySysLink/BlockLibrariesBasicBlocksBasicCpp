@@ -3,7 +3,8 @@
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
-    Display::Display(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler) : BlockTypes::BasicCpp::SimulationBlock(configurationValues, eventHandler)
+    template <typename T>
+    Display<T>::Display(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler) : BlockTypes::BasicCpp::SimulationBlock<T>(configurationValues, eventHandler)
     {
         this->sampleTime = std::make_shared<BlockTypes::BasicCpp::SampleTime>(BlockTypes::BasicCpp::SampleTimeType::inherited, 
                                                                      std::vector<BlockTypes::BasicCpp::SampleTimeType>{BlockTypes::BasicCpp::SampleTimeType::constant,
@@ -11,29 +12,38 @@ namespace BlockLibraries::BasicBlocksBasicCpp
                                                                                                                         BlockTypes::BasicCpp::SampleTimeType::discrete});    
     }
 
-    const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> Display::GetSampleTime() const
+    template <typename T>
+    const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> Display<T>::GetSampleTime() const
     {
         return this->sampleTime;
     }
 
-    const int Display::GetInputPortAmmount() const
+    template <typename T>
+    const int Display<T>::GetInputPortAmmount() const
     {
         return 1;
     }
-    const int Display::GetOutputPortAmmount() const
+
+    template <typename T>
+    const int Display<T>::GetOutputPortAmmount() const
     {
         return 0;
     }
 
-    const std::vector<bool> Display::InputsHasDirectFeedthrough() const 
+    template <typename T>
+    const std::vector<bool> Display<T>::InputsHasDirectFeedthrough() const 
     {
         return {false};
     }
 
-    std::vector<double> Display::CalculateOutputs(const std::vector<double> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime)
+    template <typename T>
+    std::vector<T> Display<T>::CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime)
     {
         this->eventHandler->NotifyNewValueEvent(currentTime, "DisplayValue", inputs[0]);
         return {};
     }  
+
+    template class Display<double>;
+    template class Display<std::complex<double>>;
 } // namespace BlockLibraries::BasicBlocks
 

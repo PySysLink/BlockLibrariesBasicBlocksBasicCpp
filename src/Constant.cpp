@@ -4,38 +4,46 @@
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
-    Constant::Constant(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler) : BlockTypes::BasicCpp::SimulationBlock(configurationValues, eventHandler)
+    template <typename T>
+    Constant<T>::Constant(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler) : BlockTypes::BasicCpp::SimulationBlock<T>(configurationValues, eventHandler)
     {
-        this->value = BlockTypes::BasicCpp::ConfigurationValueManager::TryGetConfigurationValue<double>("Value", configurationValues);
+        this->value = BlockTypes::BasicCpp::ConfigurationValueManager::TryGetConfigurationValue<T>("Value", configurationValues);
 
         this->sampleTime = std::make_shared<BlockTypes::BasicCpp::SampleTime>(BlockTypes::BasicCpp::SampleTimeType::constant);
     }
 
-    const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> Constant::GetSampleTime() const
+    template <typename T>
+    const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> Constant<T>::GetSampleTime() const
     {
         return this->sampleTime;
     }
 
-    const int Constant::GetInputPortAmmount() const
+    template <typename T>
+    const int Constant<T>::GetInputPortAmmount() const
     {
         return 0;
     }
-    const int Constant::GetOutputPortAmmount() const
+
+    template <typename T>
+    const int Constant<T>::GetOutputPortAmmount() const
     {
         return 1;
     }
 
-    const std::vector<bool> Constant::InputsHasDirectFeedthrough() const 
+    template <typename T>
+    const std::vector<bool> Constant<T>::InputsHasDirectFeedthrough() const 
     {
         return {};
     }
 
-    std::vector<double> Constant::CalculateOutputs(const std::vector<double> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime)
+    template <typename T>
+    std::vector<T> Constant<T>::CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime)
     {
         return {this->value};
     }
 
-    bool Constant::TryUpdateConfigurationValue(std::string keyName, BlockTypes::BasicCpp::ConfigurationValue value)
+    template <typename T>
+    bool Constant<T>::TryUpdateConfigurationValue(std::string keyName, BlockTypes::BasicCpp::ConfigurationValue value)
     {
         if (keyName == "Value")
         {
@@ -52,5 +60,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         else {return false;}
     }
 
+    template class Constant<double>;
+    template class Constant<std::complex<double>>;
 } // namespace BlockLibraries::BasicBlocks
 

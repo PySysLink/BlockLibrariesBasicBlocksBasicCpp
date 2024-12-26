@@ -11,11 +11,15 @@
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
-    class BasicCppFactory : public BlockTypes::BasicCpp::IBasicCppBlockFactory {
-      public:
+   template <typename T>
+      class BasicCppFactory : public BlockTypes::BasicCpp::IBasicCppBlockFactory<T> {
+         public:
          std::vector<std::string> GetSupportedBlockClasses() const;
-         std::unique_ptr<BlockTypes::BasicCpp::SimulationBlock> CreateBlock(std::string blockClass, std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> blockConfiguration, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler);
-   };
+         std::unique_ptr<BlockTypes::BasicCpp::SimulationBlock<T>> CreateBlock(std::string blockClass, std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> blockConfiguration, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler);
+      };
+
+   extern template class BasicCppFactory<double>;
+   extern template class BasicCppFactory<std::complex<double>>;
 } // BlockLibraries::BasicBlocksBasicCpp 
 
 

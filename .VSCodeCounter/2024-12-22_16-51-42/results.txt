@@ -1,0 +1,71 @@
+Date : 2024-12-22 16:51:42
+Directory : /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp
+Total : 29 files,  1989 codes, 0 comments, 448 blanks, all 2437 lines
+
+Languages
++-------------+------------+------------+------------+------------+------------+
+| language    | files      | code       | comment    | blank      | total      |
++-------------+------------+------------+------------+------------+------------+
+| cpp         |         12 |      1,044 |          0 |        222 |      1,266 |
+| CMake       |         16 |        615 |          0 |        149 |        764 |
+| CMake Cache |          1 |        330 |          0 |         77 |        407 |
++-------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                                                                          | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                                                             |         29 |      1,989 |          0 |        448 |      2,437 |
+| . (Files)                                                                                                                                                                     |          1 |         65 |          0 |         24 |         89 |
+| build                                                                                                                                                                         |         16 |      1,574 |          0 |        344 |      1,918 |
+| build (Files)                                                                                                                                                                 |          3 |        471 |          0 |        104 |        575 |
+| build/CMakeFiles                                                                                                                                                              |          8 |      1,012 |          0 |        218 |      1,230 |
+| build/CMakeFiles (Files)                                                                                                                                                      |          2 |         63 |          0 |         11 |         74 |
+| build/CMakeFiles/3.27.7                                                                                                                                                       |          4 |        844 |          0 |        189 |      1,033 |
+| build/CMakeFiles/3.27.7 (Files)                                                                                                                                               |          3 |        133 |          0 |         44 |        177 |
+| build/CMakeFiles/3.27.7/CompilerIdCXX                                                                                                                                         |          1 |        711 |          0 |        145 |        856 |
+| build/CMakeFiles/Export                                                                                                                                                       |          2 |        105 |          0 |         18 |        123 |
+| build/CMakeFiles/Export/1bb197d122437d3908ced95dcb5513ea                                                                                                                      |          2 |        105 |          0 |         18 |        123 |
+| build/src                                                                                                                                                                     |          5 |         91 |          0 |         22 |        113 |
+| build/src (Files)                                                                                                                                                             |          1 |         37 |          0 |          8 |         45 |
+| build/src/CMakeFiles                                                                                                                                                          |          4 |         54 |          0 |         14 |         68 |
+| build/src/CMakeFiles (Files)                                                                                                                                                  |          1 |         12 |          0 |          5 |         17 |
+| build/src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir                                                                                                                    |          3 |         42 |          0 |          9 |         51 |
+| src                                                                                                                                                                           |         12 |        350 |          0 |         80 |        430 |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+------------+------------+------------+------------+
+| filename                                                                                                                                                                      | language    | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+------------+------------+------------+------------+
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/CMakeLists.txt                                                                                                   | CMake       |         65 |          0 |         24 |         89 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/BlockLibrariesBasicBlocksBasicCppConfig.cmake                                                              | CMake       |         26 |          0 |          8 |         34 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeCache.txt                                                                                             | CMake Cache |        330 |          0 |         77 |        407 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeFiles/3.27.7/CMakeCCompiler.cmake                                                                     | CMake       |         57 |          0 |         18 |         75 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeFiles/3.27.7/CMakeCXXCompiler.cmake                                                                   | CMake       |         66 |          0 |         20 |         86 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeFiles/3.27.7/CMakeSystem.cmake                                                                        | CMake       |         10 |          0 |          6 |         16 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeFiles/3.27.7/CompilerIdCXX/CMakeCXXCompilerId.cpp                                                     | cpp         |        711 |          0 |        145 |        856 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeFiles/CMakeDirectoryInformation.cmake                                                                 | CMake       |         12 |          0 |          5 |         17 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeFiles/Export/1bb197d122437d3908ced95dcb5513ea/BlockLibrariesBasicBlocksBasicCppTargets-noconfig.cmake | CMake       |         15 |          0 |          5 |         20 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeFiles/Export/1bb197d122437d3908ced95dcb5513ea/BlockLibrariesBasicBlocksBasicCppTargets.cmake          | CMake       |         90 |          0 |         13 |        103 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/CMakeFiles/Makefile.cmake                                                                                  | CMake       |         51 |          0 |          6 |         57 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/cmake_install.cmake                                                                                        | CMake       |        115 |          0 |         19 |        134 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/DependInfo.cmake                                      | CMake       |         19 |          0 |          6 |         25 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/cmake_clean.cmake                                     | CMake       |         20 |          0 |          2 |         22 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/src/CMakeFiles/BlockLibrariesBasicBlocksBasicCpp.dir/cmake_clean_target.cmake                              | CMake       |          3 |          0 |          1 |          4 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/src/CMakeFiles/CMakeDirectoryInformation.cmake                                                             | CMake       |         12 |          0 |          5 |         17 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/build/src/cmake_install.cmake                                                                                    | CMake       |         37 |          0 |          8 |         45 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/Acumulator.cpp                                                                                               | cpp         |         40 |          0 |         10 |         50 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/Acumulator.h                                                                                                 | cpp         |         22 |          0 |          7 |         29 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/BasicCppFactory.cpp                                                                                          | cpp         |         42 |          0 |          3 |         45 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/BasicCppFactory.h                                                                                            | cpp         |         18 |          0 |          5 |         23 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/CMakeLists.txt                                                                                               | CMake       |         17 |          0 |          3 |         20 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/Constant.cpp                                                                                                 | cpp         |         47 |          0 |         10 |         57 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/Constant.h                                                                                                   | cpp         |         23 |          0 |          6 |         29 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/Display.cpp                                                                                                  | cpp         |         33 |          0 |          7 |         40 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/Display.h                                                                                                    | cpp         |         20 |          0 |          7 |         27 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/RegisterBasicCppFactories.cpp                                                                                | cpp         |          5 |          0 |          3 |          8 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/Sumator.cpp                                                                                                  | cpp         |         58 |          0 |         10 |         68 |
+| /home/pello/BlockLibraries/BlockLibrariesBasicBlocksBasicCpp/src/Sumator.h                                                                                                    | cpp         |         25 |          0 |          9 |         34 |
+| Total                                                                                                                                                                         |             |      1,989 |          0 |        448 |      2,437 |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+------------+------------+------------+------------+
