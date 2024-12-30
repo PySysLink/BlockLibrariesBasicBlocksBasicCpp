@@ -7,7 +7,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     {
         try
         {
-            this->value = BlockTypes::BasicCpp::ConfigurationValueManager::TryGetConfigurationValue<double>("InitialValue", configurationValues);
+            this->value = BlockTypes::BasicCpp::ConfigurationValueManager::TryGetConfigurationValue<T>("InitialValue", configurationValues);
         }
         catch (...) // TODO change to correct error
         {

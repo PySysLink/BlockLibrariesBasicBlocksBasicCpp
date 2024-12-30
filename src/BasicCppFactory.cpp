@@ -3,6 +3,7 @@
 #include "Sumator.h"
 #include "Display.h"
 #include "Acumulator.h"
+#include "Integrator.h"
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
@@ -12,7 +13,8 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         return {"BasicBlocks/Constant",
                 "BasicBlocks/Sumator",
                 "BasicBlocks/Acumulator",
-                "BasicBlocks/Display"};
+                "BasicBlocks/Display",
+                "BasicBlocks/Integrator"};
     }
 
     template <typename T>
@@ -37,6 +39,17 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         {
             std::unique_ptr<BlockTypes::BasicCpp::SimulationBlock<T>> simulationBlock = std::make_unique<BlockLibraries::BasicBlocksBasicCpp::Acumulator<T>>(blockConfiguration, eventHandler);
             return std::move(simulationBlock);
+        }
+        else if (blockClass == "BasicBlocks/Integrator")
+        {
+            if constexpr (std::is_same_v<T, double>)
+            {
+                return std::make_unique<BlockLibraries::BasicBlocksBasicCpp::Integrator<double>>(blockConfiguration, eventHandler);
+            }
+            else
+            {
+                throw std::invalid_argument("The Integrator block is only supported for type double.");
+            }
         }
         else 
         {
