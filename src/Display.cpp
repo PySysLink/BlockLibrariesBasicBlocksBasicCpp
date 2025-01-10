@@ -10,6 +10,8 @@ namespace BlockLibraries::BasicBlocksBasicCpp
                                                                      std::vector<BlockTypes::BasicCpp::SampleTimeType>{BlockTypes::BasicCpp::SampleTimeType::constant,
                                                                                                                         BlockTypes::BasicCpp::SampleTimeType::continuous,
                                                                                                                         BlockTypes::BasicCpp::SampleTimeType::discrete});    
+
+        this->id = BlockTypes::BasicCpp::ConfigurationValueManager::TryGetConfigurationValue<std::string>("Id", configurationValues);
     }
 
     template <typename T>
@@ -39,7 +41,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     template <typename T>
     std::vector<T> Display<T>::CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime)
     {
-        this->eventHandler->NotifyNewValueEvent(currentTime, "DisplayValue", inputs[0]);
+        this->eventHandler->NotifyNewValueEvent(currentTime, "DisplayValue/" + this->id, inputs[0]);
         return {};
     }  
 
