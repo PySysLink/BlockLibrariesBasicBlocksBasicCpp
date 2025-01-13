@@ -45,7 +45,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     }
 
     template <typename T>
-    std::vector<T> Acumulator<T>::CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime)
+    std::vector<T> Acumulator<T>::CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime, bool isMinorStep)
     {
         T value_no_updated = this->value;
         this->value += inputs[0];

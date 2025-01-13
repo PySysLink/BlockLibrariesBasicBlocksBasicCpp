@@ -21,7 +21,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
             const int GetOutputPortAmmount() const;
             const std::vector<bool> InputsHasDirectFeedthrough() const;
 
-            std::vector<T> CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime);
+            std::vector<T> CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime, bool isMinorStep=false);
     };
 
     extern template class Acumulator<double>;

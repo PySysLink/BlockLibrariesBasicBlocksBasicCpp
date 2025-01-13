@@ -42,7 +42,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     }
 
     template <typename T>
-    std::vector<T> Sumator<T>::CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime)
+    std::vector<T> Sumator<T>::CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime, bool isMinorStep)
     {
         T sumation = 0;
         for (int i = 0; i < this->gains.size(); i++)

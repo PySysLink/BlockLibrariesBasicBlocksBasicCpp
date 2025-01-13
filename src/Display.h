@@ -1,5 +1,5 @@
-#ifndef BLOCK_LIBRARIES_BASIC_BLOCKS_DISPLAY
-#define BLOCK_LIBRARIES_BASIC_BLOCKS_DISPLAY
+#ifndef SRC_DISPLAY
+#define SRC_DISPLAY
 
 
 #include <BlockTypes/BasicCpp/SimulationBlock.h>
@@ -20,7 +20,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
             const int GetOutputPortAmmount() const;
             const std::vector<bool> InputsHasDirectFeedthrough() const;
 
-            std::vector<T> CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime);
+            std::vector<T> CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime, bool isMinorStep=false);
     };
 
     extern template class Display<double>;
@@ -28,4 +28,4 @@ namespace BlockLibraries::BasicBlocksBasicCpp
 } // namespace BasicBlocksBasicCpp
 
 
-#endif /* BLOCK_LIBRARIES_BASIC_BLOCKS_DISPLAY */
+#endif /* SRC_DISPLAY */

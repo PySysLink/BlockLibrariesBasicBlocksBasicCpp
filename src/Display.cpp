@@ -39,9 +39,12 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     }
 
     template <typename T>
-    std::vector<T> Display<T>::CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime)
+    std::vector<T> Display<T>::CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime, bool isMinorStep)
     {
-        this->eventHandler->NotifyNewValueEvent(currentTime, "DisplayValue/" + this->id, inputs[0]);
+        if (!isMinorStep)
+        {
+            this->eventHandler->NotifyNewValueEvent(currentTime, "DisplayValue/" + this->id, inputs[0]);
+        }
         return {};
     }  
 
