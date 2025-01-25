@@ -6,6 +6,7 @@ add_library(BlockLibrariesBasicBlocksBasicCpp SHARED
     BasicCppFactory.cpp
     Acumulator.cpp
     Integrator.cpp
+    ContinuousToDiscrete.cpp
     RegisterBasicCppFactories.cpp
 )
 

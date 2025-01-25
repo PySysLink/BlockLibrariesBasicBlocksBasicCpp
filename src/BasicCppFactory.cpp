@@ -4,6 +4,7 @@
 #include "Display.h"
 #include "Acumulator.h"
 #include "Integrator.h"
+#include "ContinuousToDiscrete.h"
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
@@ -14,7 +15,8 @@ namespace BlockLibraries::BasicBlocksBasicCpp
                 "BasicBlocks/Sumator",
                 "BasicBlocks/Acumulator",
                 "BasicBlocks/Display",
-                "BasicBlocks/Integrator"};
+                "BasicBlocks/Integrator",
+                "BasicBlocks/ContinuousToDiscrete"};
     }
 
     template <typename T>
@@ -38,6 +40,11 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         else if (blockClass == "BasicBlocks/Acumulator")
         {
             std::unique_ptr<BlockTypes::BasicCpp::SimulationBlock<T>> simulationBlock = std::make_unique<BlockLibraries::BasicBlocksBasicCpp::Acumulator<T>>(blockConfiguration, eventHandler);
+            return std::move(simulationBlock);
+        }
+        else if (blockClass == "BasicBlocks/ContinuousToDiscrete")
+        {
+            std::unique_ptr<BlockTypes::BasicCpp::SimulationBlock<T>> simulationBlock = std::make_unique<BlockLibraries::BasicBlocksBasicCpp::ContinuousToDiscrete<T>>(blockConfiguration, eventHandler);
             return std::move(simulationBlock);
         }
         else if (blockClass == "BasicBlocks/Integrator")
