@@ -1,4 +1,5 @@
 #include "ContinuousToDiscrete.h"
+#include <iostream>
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
@@ -16,7 +17,6 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         }
         catch(const std::exception& e)
         {
-            this->sampleTimeValue = std::numeric_limits<double>::quiet_NaN();
             multirateSampleTimes.push_back(std::make_shared<BlockTypes::BasicCpp::SampleTime>(BlockTypes::BasicCpp::SampleTimeType::inherited,
                                                                         std::vector<BlockTypes::BasicCpp::SampleTimeType>{BlockTypes::BasicCpp::SampleTimeType::continuous}));
         }
@@ -27,7 +27,6 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         }
         catch(const std::invalid_argument& e)
         {
-            this->sampleTimeValue = std::numeric_limits<double>::quiet_NaN();
             multirateSampleTimes.push_back(std::make_shared<BlockTypes::BasicCpp::SampleTime>(BlockTypes::BasicCpp::SampleTimeType::inherited,
                                                                         std::vector<BlockTypes::BasicCpp::SampleTimeType>{BlockTypes::BasicCpp::SampleTimeType::discrete}));
         }
@@ -64,6 +63,10 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     template <typename T>
     std::vector<T> ContinuousToDiscrete<T>::CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime, bool isMinorStep)
     {
+        if (std::isnan(this->simulationStartTime))
+        {
+            this->simulationStartTime = currentTime;
+        }
         if (sampleTime->GetSampleTimeType() == BlockTypes::BasicCpp::SampleTimeType::continuous)
         {
             this->bufferedValue = inputs[0];
@@ -71,9 +74,28 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         }
         else
         {
+            if (std::isnan(this->sampleTimeValue))
+            {
+                this->sampleTimeValue = sampleTime->GetDiscreteSampleTime();
+            }
             return {this->bufferedValue};
         }
     }
+
+    template <typename T>
+    const std::vector<double> ContinuousToDiscrete<T>::GetKnownEvents(const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> resolvedSampleTime, double simulationStartTime, double simulationEndTime) const
+    {
+        std::vector<double> knownSampleTimes = {};
+        for (double t = simulationStartTime; t <= simulationEndTime; t += resolvedSampleTime->GetMultirateSampleTimes()[1]->GetDiscreteSampleTime())
+        {
+            knownSampleTimes.push_back(t);
+        }
+        return knownSampleTimes;
+    }
+
+
+    
+
 
     template class ContinuousToDiscrete<double>;
     template class ContinuousToDiscrete<std::complex<double>>;

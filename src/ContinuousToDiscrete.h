@@ -13,8 +13,10 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         private:
             std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime;
             T bufferedValue;
-            int continuousSampleTimeGroup = std::numeric_limits<int>::quiet_NaN();
+            int continuousSampleTimeGroup = -1;
             double sampleTimeValue = std::numeric_limits<double>::quiet_NaN();
+
+            double simulationStartTime = std::numeric_limits<double>::quiet_NaN();
         public:
             ContinuousToDiscrete(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler);
             const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> GetSampleTime() const;
@@ -22,7 +24,10 @@ namespace BlockLibraries::BasicBlocksBasicCpp
             const int GetOutputPortAmmount() const;
             const std::vector<bool> InputsHasDirectFeedthrough() const;
 
+
             std::vector<T> CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime, bool isMinorStep=false);
+
+            const std::vector<double> GetKnownEvents(const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> resolvedSampleTime, double simulationStartTime, double simulationEndTime) const override;
     };
 
     extern template class ContinuousToDiscrete<double>;

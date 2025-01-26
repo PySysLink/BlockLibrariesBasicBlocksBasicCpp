@@ -1,4 +1,5 @@
 #include "Integrator.h"
+#include <limits>
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
@@ -74,6 +75,12 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     const std::vector<double> Integrator<T>::GetContinousStateDerivatives(const std::vector<T> inputs, const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime) const
     {
         return {inputs[0]};
+    }
+
+    template <typename T>
+    const std::vector<std::pair<double, double>> Integrator<T>::GetEvents(const std::vector<T> inputs, const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double eventTime, std::vector<double> eventTimeStates) const
+    {
+        return {std::make_pair(eventTimeStates[0], std::numeric_limits<double>::quiet_NaN())};
     }
 
 
