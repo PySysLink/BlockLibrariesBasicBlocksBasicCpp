@@ -2,9 +2,9 @@
 add_library(BlockLibrariesBasicBlocksBasicCpp SHARED
     Constant.cpp
     Display.cpp
-    Sumator.cpp 
+    Adder.cpp 
     BasicCppFactory.cpp
-    Acumulator.cpp
+    Accumulator.cpp
     Integrator.cpp
     ContinuousToDiscrete.cpp
     RegisterBasicCppFactories.cpp

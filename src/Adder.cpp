@@ -1,9 +1,9 @@
-#include "Sumator.h"
+#include "Adder.h"
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
     template <typename T>
-    Sumator<T>::Sumator(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler) : BlockTypes::BasicCpp::SimulationBlock<T>(configurationValues, eventHandler)
+    Adder<T>::Adder(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler) : BlockTypes::BasicCpp::SimulationBlock<T>(configurationValues, eventHandler)
     {
         this->gains = BlockTypes::BasicCpp::ConfigurationValueManager::TryGetConfigurationValue<std::vector<T>>("Gains", configurationValues);
 
@@ -14,24 +14,24 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     }
 
     template <typename T>
-    const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> Sumator<T>::GetSampleTime() const
+    const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> Adder<T>::GetSampleTime() const
     {
         return this->sampleTime;
     }
     template <typename T>
-    const int Sumator<T>::GetInputPortAmmount() const
+    const int Adder<T>::GetInputPortAmount() const
     {
         return this->gains.size();
     }
 
     template <typename T>
-    const int Sumator<T>::GetOutputPortAmmount() const
+    const int Adder<T>::GetOutputPortAmount() const
     {
         return 1;
     }
 
     template <typename T>
-    const std::vector<bool> Sumator<T>::InputsHasDirectFeedthrough() const 
+    const std::vector<bool> Adder<T>::InputsHasDirectFeedthrough() const 
     {
         std::vector<bool> result = {};
         for (int i = 0; i < this->gains.size(); i++)
@@ -42,7 +42,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     }
 
     template <typename T>
-    std::vector<T> Sumator<T>::CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime, bool isMinorStep)
+    std::vector<T> Adder<T>::CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime, bool isMinorStep)
     {
         T sumation = 0;
         for (int i = 0; i < this->gains.size(); i++)
@@ -53,7 +53,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     }
 
     template <typename T>
-    bool Sumator<T>::TryUpdateConfigurationValue(std::string keyName, BlockTypes::BasicCpp::ConfigurationValue value)
+    bool Adder<T>::TryUpdateConfigurationValue(std::string keyName, BlockTypes::BasicCpp::ConfigurationValue value)
     {
         if (keyName == "Gains")
         {
@@ -70,8 +70,8 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         else {return false;}
     }
 
-    template class Sumator<double>;
-    template class Sumator<std::complex<double>>;
+    template class Adder<double>;
+    template class Adder<std::complex<double>>;
 
 } // namespace BlockLibraries::BasicBlocks
 

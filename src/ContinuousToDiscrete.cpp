@@ -42,13 +42,13 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     }
 
     template <typename T>
-    const int ContinuousToDiscrete<T>::GetInputPortAmmount() const
+    const int ContinuousToDiscrete<T>::GetInputPortAmount() const
     {
         return 1;
     }
 
     template <typename T>
-    const int ContinuousToDiscrete<T>::GetOutputPortAmmount() const
+    const int ContinuousToDiscrete<T>::GetOutputPortAmount() const
     {
         return 1;
     }

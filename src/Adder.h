@@ -9,16 +9,16 @@
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
     template <typename T>
-    class Sumator : public BlockTypes::BasicCpp::SimulationBlock<T>
+    class Adder : public BlockTypes::BasicCpp::SimulationBlock<T>
     {
         private:
             std::vector<T> gains;
             std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime;
         public:
-            Sumator(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler);
+            Adder(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler);
             const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> GetSampleTime() const;
-            const int GetInputPortAmmount() const;
-            const int GetOutputPortAmmount() const;
+            const int GetInputPortAmount() const;
+            const int GetOutputPortAmount() const;
             const std::vector<bool> InputsHasDirectFeedthrough() const;
 
             std::vector<T> CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime, bool isMinorStep=false);
@@ -26,8 +26,8 @@ namespace BlockLibraries::BasicBlocksBasicCpp
             bool TryUpdateConfigurationValue(std::string keyName, BlockTypes::BasicCpp::ConfigurationValue value) override;
     };
 
-    extern template class Sumator<double>;
-    extern template class Sumator<std::complex<double>>;
+    extern template class Adder<double>;
+    extern template class Adder<std::complex<double>>;
 } // namespace BasicBlocks
 
 

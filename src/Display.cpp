@@ -21,13 +21,13 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     }
 
     template <typename T>
-    const int Display<T>::GetInputPortAmmount() const
+    const int Display<T>::GetInputPortAmount() const
     {
         return 1;
     }
 
     template <typename T>
-    const int Display<T>::GetOutputPortAmmount() const
+    const int Display<T>::GetOutputPortAmount() const
     {
         return 0;
     }

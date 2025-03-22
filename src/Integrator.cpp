@@ -35,13 +35,13 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     }
 
     template <typename T>
-    const int Integrator<T>::GetInputPortAmmount() const
+    const int Integrator<T>::GetInputPortAmount() const
     {
         return 1;
     }
 
     template <typename T>
-    const int Integrator<T>::GetOutputPortAmmount() const
+    const int Integrator<T>::GetOutputPortAmount() const
     {
         return 1;
     }
@@ -72,7 +72,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     }
 
     template <typename T>
-    const std::vector<double> Integrator<T>::GetContinousStateDerivatives(const std::vector<T> inputs, const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime) const
+    const std::vector<double> Integrator<T>::GetContinuousStateDerivatives(const std::vector<T> inputs, const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime) const
     {
         return {inputs[0]};
     }

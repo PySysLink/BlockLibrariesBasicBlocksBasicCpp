@@ -1,8 +1,8 @@
 #include "BasicCppFactory.h"
 #include "Constant.h"
-#include "Sumator.h"
+#include "Adder.h"
 #include "Display.h"
-#include "Acumulator.h"
+#include "Accumulator.h"
 #include "Integrator.h"
 #include "ContinuousToDiscrete.h"
 
@@ -12,8 +12,8 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     std::vector<std::string> BasicCppFactory<T>::GetSupportedBlockClasses() const
     {
         return {"BasicBlocks/Constant",
-                "BasicBlocks/Sumator",
-                "BasicBlocks/Acumulator",
+                "BasicBlocks/Adder",
+                "BasicBlocks/Accumulator",
                 "BasicBlocks/Display",
                 "BasicBlocks/Integrator",
                 "BasicBlocks/ContinuousToDiscrete"};
@@ -27,9 +27,9 @@ namespace BlockLibraries::BasicBlocksBasicCpp
             std::unique_ptr<BlockTypes::BasicCpp::SimulationBlock<T>> simulationBlock = std::make_unique<BlockLibraries::BasicBlocksBasicCpp::Constant<T>>(blockConfiguration, eventHandler);
             return std::move(simulationBlock);
         }
-        else if (blockClass == "BasicBlocks/Sumator")
+        else if (blockClass == "BasicBlocks/Adder")
         {
-            std::unique_ptr<BlockTypes::BasicCpp::SimulationBlock<T>> simulationBlock = std::make_unique<BlockLibraries::BasicBlocksBasicCpp::Sumator<T>>(blockConfiguration, eventHandler);
+            std::unique_ptr<BlockTypes::BasicCpp::SimulationBlock<T>> simulationBlock = std::make_unique<BlockLibraries::BasicBlocksBasicCpp::Adder<T>>(blockConfiguration, eventHandler);
             return std::move(simulationBlock);
         }
         else if (blockClass == "BasicBlocks/Display")
@@ -37,9 +37,9 @@ namespace BlockLibraries::BasicBlocksBasicCpp
             std::unique_ptr<BlockTypes::BasicCpp::SimulationBlock<T>> simulationBlock = std::make_unique<BlockLibraries::BasicBlocksBasicCpp::Display<T>>(blockConfiguration, eventHandler);
             return std::move(simulationBlock);
         }
-        else if (blockClass == "BasicBlocks/Acumulator")
+        else if (blockClass == "BasicBlocks/Accumulator")
         {
-            std::unique_ptr<BlockTypes::BasicCpp::SimulationBlock<T>> simulationBlock = std::make_unique<BlockLibraries::BasicBlocksBasicCpp::Acumulator<T>>(blockConfiguration, eventHandler);
+            std::unique_ptr<BlockTypes::BasicCpp::SimulationBlock<T>> simulationBlock = std::make_unique<BlockLibraries::BasicBlocksBasicCpp::Accumulator<T>>(blockConfiguration, eventHandler);
             return std::move(simulationBlock);
         }
         else if (blockClass == "BasicBlocks/ContinuousToDiscrete")

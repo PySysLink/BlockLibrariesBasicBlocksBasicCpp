@@ -1,9 +1,9 @@
-#include "Acumulator.h"
+#include "Accumulator.h"
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
     template <typename T>
-    Acumulator<T>::Acumulator(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler) : BlockTypes::BasicCpp::SimulationBlock<T>(configurationValues, eventHandler)
+    Accumulator<T>::Accumulator(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler) : BlockTypes::BasicCpp::SimulationBlock<T>(configurationValues, eventHandler)
     {
         try
         {
@@ -20,40 +20,40 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     }
 
     template <typename T>
-    const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> Acumulator<T>::GetSampleTime() const
+    const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> Accumulator<T>::GetSampleTime() const
     {
         return this->sampleTime;
     }
 
     template <typename T>
-    const int Acumulator<T>::GetInputPortAmmount() const
+    const int Accumulator<T>::GetInputPortAmount() const
     {
         return 1;
     }
 
     template <typename T>
-    const int Acumulator<T>::GetOutputPortAmmount() const
+    const int Accumulator<T>::GetOutputPortAmount() const
     {
         return 1;
     }
 
     template <typename T>
-    const std::vector<bool> Acumulator<T>::InputsHasDirectFeedthrough() const 
+    const std::vector<bool> Accumulator<T>::InputsHasDirectFeedthrough() const 
     {
         std::vector<bool> result = {false};
         return result;
     }
 
     template <typename T>
-    std::vector<T> Acumulator<T>::CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime, bool isMinorStep)
+    std::vector<T> Accumulator<T>::CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime, bool isMinorStep)
     {
         T value_no_updated = this->value;
         this->value += inputs[0];
         return {value_no_updated};
     }
 
-    template class Acumulator<double>;
-    template class Acumulator<std::complex<double>>;
+    template class Accumulator<double>;
+    template class Accumulator<std::complex<double>>;
 
 } // namespace BlockLibraries::BasicBlocks
 

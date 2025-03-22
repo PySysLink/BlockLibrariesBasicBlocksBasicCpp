@@ -16,8 +16,8 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         public:
             Integrator(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler);
             const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> GetSampleTime() const;
-            const int GetInputPortAmmount() const;
-            const int GetOutputPortAmmount() const;
+            const int GetInputPortAmount() const;
+            const int GetOutputPortAmount() const;
             const std::vector<bool> InputsHasDirectFeedthrough() const;
 
             std::vector<T> CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime, bool isMinorStep=false);
@@ -25,7 +25,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
             const std::vector<double> GetContinuousStates() const;
             void SetContinuousStates(std::vector<double> newStates);
 
-            const std::vector<double> GetContinousStateDerivatives(const std::vector<T> inputs, const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime) const;
+            const std::vector<double> GetContinuousStateDerivatives(const std::vector<T> inputs, const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime) const;
 
             const std::vector<std::pair<double, double>> GetEvents(const std::vector<T> inputs, const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double eventTime, std::vector<double> eventTimeStates) const override;
     };
