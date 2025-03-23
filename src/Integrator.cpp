@@ -78,7 +78,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     }
 
     template <typename T>
-    const std::vector<std::pair<double, double>> Integrator<T>::GetEvents(const std::vector<T> inputs, const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double eventTime, std::vector<double> eventTimeStates) const
+    const std::vector<std::pair<double, double>> Integrator<T>::GetEvents(const std::vector<T> inputs, const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double eventTime, std::vector<double> eventTimeStates, bool includeKnownEvents) const
     {
         return {std::make_pair(eventTimeStates[0], std::numeric_limits<double>::quiet_NaN())};
     }
