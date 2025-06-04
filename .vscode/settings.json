@@ -45,6 +45,11 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "cstring": "cpp",
+        "complex": "cpp",
+        "optional": "cpp",
+        "sstream": "cpp",
+        "cinttypes": "cpp"
     }
 }

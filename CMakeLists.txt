@@ -33,8 +33,8 @@ add_subdirectory(src)
 # add_subdirectory(Tests)
 
 
-set(PY_SYS_LINK_BASE_INCLUDE_DIRS "${CMAKE_INSTALL_PREFIX}/include")
-set(PY_SYS_LINK_BASE_LIBRARIES "${CMAKE_INSTALL_PREFIX}/lib/libBlockLibrariesBasicBlocksBasicCpp.a")
+# set(PY_SYS_LINK_BASE_INCLUDE_DIRS "${CMAKE_INSTALL_PREFIX}/include")
+# set(PY_SYS_LINK_BASE_LIBRARIES "${CMAKE_INSTALL_PREFIX}/lib/libBlockLibrariesBasicBlocksBasicCpp.a")
 
 message("CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}")
 
@@ -46,9 +46,13 @@ install(DIRECTORY src/                # Install headers
 
 install(TARGETS BlockLibrariesBasicBlocksBasicCpp
     EXPORT BlockLibrariesBasicBlocksBasicCppTargets # Associate this target with the export
-    ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib/pysyslink_plugins/basic_blocks_basic_cpp
+    LIBRARY DESTINATION lib/pysyslink_plugins/basic_blocks_basic_cpp
     RUNTIME DESTINATION bin
+)
+
+install(FILES ${CMAKE_SOURCE_DIR}/basic_blocks_basic_cpp.pslkp.yaml
+    DESTINATION lib/pysyslink_plugins/basic_blocks_basic_cpp
 )
 
 
@@ -63,7 +67,7 @@ install(EXPORT BlockLibrariesBasicBlocksBasicCppTargets
 
 # Set the include directories and libraries for the package
 set(PACKAGE_INCLUDE_DIRS "${CMAKE_INSTALL_PREFIX}/include")
-set(PACKAGE_LIBRARIES "${CMAKE_INSTALL_PREFIX}/lib")
+set(PACKAGE_LIBRARIES "${CMAKE_INSTALL_PREFIX}/lib/pysyslink_plugins/basic_blocks_basic_cpp")
 
 
 # Create and install the config file

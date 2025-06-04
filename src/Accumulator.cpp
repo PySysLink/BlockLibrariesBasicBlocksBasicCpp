@@ -14,9 +14,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
             this->value = 0;
         }
         this->sampleTimeValue = BlockTypes::BasicCpp::ConfigurationValueManager::TryGetConfigurationValue<double>("SampleTime", configurationValues);
-
         this->sampleTime = std::make_shared<BlockTypes::BasicCpp::SampleTime>(BlockTypes::BasicCpp::SampleTimeType::discrete, this->sampleTimeValue);    
-
     }
 
     template <typename T>

@@ -1,0 +1,28 @@
+pluginName: basic_blocks_basic_cpp
+pluginType: coreBlockLibrary
+blockType: BasicCpp
+dynamicLibrary: libBlockLibrariesBasicBlocksBasicCpp.so
+blockLibraries:
+  - name: BasicBlocks
+    blockTypes:
+      - name: Accumulator
+        configurationValues:
+          - InitialValue: 0
+          - SampleTime: -1
+      - name: Adder
+        configurationValues:
+          - Gains:
+            - 1
+            - 1
+      - name: Constant
+        configurationValues:
+          - Value: 1
+      - name: ContinuousToDiscrete
+        configurationValues:
+          - ContinuousSampleTimeGroup: 1
+          - DiscreteSampleTime: -1
+      - name: Display
+      - name: Integrator
+        configurationValues:
+          - InitialValue: 0
+          - ContinuousSampleTimeGroup: 1
