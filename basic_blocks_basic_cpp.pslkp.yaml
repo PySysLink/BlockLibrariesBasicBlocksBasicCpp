@@ -7,22 +7,38 @@ blockLibraries:
     blockTypes:
       - name: Accumulator
         configurationValues:
-          - InitialValue: 0
-          - SampleTime: -1
+          - name: InitialValue
+            defaultValue: 0
+            type: double
+          - name: SampleTime
+            defaultValue: -1
+            type: double
       - name: Adder
         configurationValues:
-          - Gains:
+          - name: Gains
+            defaultValue:
             - 1
             - 1
+            type: double[]
       - name: Constant
         configurationValues:
-          - Value: 1
+          - name: Value
+            defaultValue: 1
+            type: double
       - name: ContinuousToDiscrete
         configurationValues:
-          - ContinuousSampleTimeGroup: 1
-          - DiscreteSampleTime: -1
+          - name: ContinuousSampleTimeGroup
+            defaultValue: 1
+            type: int
+          - name: DiscreteSampleTime
+            defaultValue: -1
+            type: float
       - name: Display
       - name: Integrator
         configurationValues:
-          - InitialValue: 0
-          - ContinuousSampleTimeGroup: 1
+          - name: InitialValue
+            defaultValue: 0
+            type: float
+          - name: ContinuousSampleTimeGroup
+            defaultValue: 1
+            type: float
