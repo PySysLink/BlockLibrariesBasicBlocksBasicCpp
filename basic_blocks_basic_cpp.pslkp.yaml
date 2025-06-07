@@ -9,22 +9,22 @@ blockLibraries:
         configurationValues:
           - name: InitialValue
             defaultValue: 0
-            type: double
+            type: float
           - name: SampleTime
             defaultValue: -1
-            type: double
+            type: float
       - name: Adder
         configurationValues:
           - name: Gains
             defaultValue:
             - 1
             - 1
-            type: double[]
+            type: float[]
       - name: Constant
         configurationValues:
           - name: Value
             defaultValue: 1
-            type: double
+            type: float
       - name: ContinuousToDiscrete
         configurationValues:
           - name: ContinuousSampleTimeGroup
