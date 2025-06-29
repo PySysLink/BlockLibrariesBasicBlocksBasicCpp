@@ -8,6 +8,7 @@ add_library(BlockLibrariesBasicBlocksBasicCpp SHARED
     Integrator.cpp
     ContinuousToDiscrete.cpp
     RegisterBasicCppFactories.cpp
+    Gain.cpp
 )
 
 target_include_directories(BlockLibrariesBasicBlocksBasicCpp PRIVATE ${CMAKE_SOURCE_DIR}/src)

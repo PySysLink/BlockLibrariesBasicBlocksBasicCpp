@@ -5,6 +5,7 @@
 #include "Accumulator.h"
 #include "Integrator.h"
 #include "ContinuousToDiscrete.h"
+#include "Gain.h"
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
@@ -16,7 +17,8 @@ namespace BlockLibraries::BasicBlocksBasicCpp
                 "BasicBlocks/Accumulator",
                 "BasicBlocks/Display",
                 "BasicBlocks/Integrator",
-                "BasicBlocks/ContinuousToDiscrete"};
+                "BasicBlocks/ContinuousToDiscrete",
+                "BasicBlocks/Gain"};
     }
 
     template <typename T>
@@ -57,6 +59,11 @@ namespace BlockLibraries::BasicBlocksBasicCpp
             {
                 throw std::invalid_argument("The Integrator block is only supported for type double.");
             }
+        }
+        else if (blockClass == "BasicBlocks/Gain")
+        {
+            std::unique_ptr<BlockTypes::BasicCpp::SimulationBlock<T>> simulationBlock = std::make_unique<BlockLibraries::BasicBlocksBasicCpp::Gain<T>>(blockConfiguration, eventHandler);
+            return std::move(simulationBlock);
         }
         else 
         {

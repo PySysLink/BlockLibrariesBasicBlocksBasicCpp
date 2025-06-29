@@ -20,6 +20,7 @@ blockLibraries:
             - 1
             - 1
             type: float[]
+        blockShape: circle
       - name: Constant
         configurationValues:
           - name: Value
@@ -42,3 +43,9 @@ blockLibraries:
           - name: ContinuousSampleTimeGroup
             defaultValue: 1
             type: float
+      - name: Gain
+        configurationValues:
+          - name: Gain 
+            defaultValue: 1
+            type: float
+        blockShape: triangle
