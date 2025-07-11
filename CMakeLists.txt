@@ -1,8 +1,15 @@
 cmake_minimum_required(VERSION 3.11)
 
-# Project name and version
-project(BlockLibrariesBasicBlocksBasicCpp VERSION 0.0)
+set(PROJECT_VERSION "0.1.0")
+set(BLOCK_TYPES_BASIC_CPP_VERSION "0.1.0")
+set(PROJECT_VERSION_UNDERSCORE "0_1_0")
 
+# Project name and version
+project(BlockLibrariesBasicBlocksBasicCpp VERSION ${PROJECT_VERSION})
+
+set(INSTALLED_DYNAMIC_LIB_NAME "BlockLibrariesBasicBlocksBasicCpp-${PROJECT_VERSION}")
+
+set(PLUGIN_INSTALL_DIR lib/pysyslink_plugins/basic_blocks_basic_cpp_${PROJECT_VERSION_UNDERSCORE})
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
@@ -25,8 +32,7 @@ endif()
 message(STATUS "Default install path: ${CMAKE_INSTALL_PREFIX}")
 
 # Locate PySysLinkBase
-find_package(PySysLinkBase REQUIRED)
-find_package(BlockTypesBasicCpp REQUIRED)
+find_package(BlockTypesBasicCpp ${BLOCK_TYPES_BASIC_CPP_VERSION} REQUIRED)
 
 # Add subdirectories
 add_subdirectory(src)
@@ -46,13 +52,19 @@ install(DIRECTORY src/                # Install headers
 
 install(TARGETS BlockLibrariesBasicBlocksBasicCpp
     EXPORT BlockLibrariesBasicBlocksBasicCppTargets # Associate this target with the export
-    ARCHIVE DESTINATION lib/pysyslink_plugins/basic_blocks_basic_cpp
-    LIBRARY DESTINATION lib/pysyslink_plugins/basic_blocks_basic_cpp
+    ARCHIVE DESTINATION ${PLUGIN_INSTALL_DIR}
+    LIBRARY DESTINATION ${PLUGIN_INSTALL_DIR}
     RUNTIME DESTINATION bin
 )
 
-install(FILES ${CMAKE_SOURCE_DIR}/basic_blocks_basic_cpp.pslkp.yaml
-    DESTINATION lib/pysyslink_plugins/basic_blocks_basic_cpp
+configure_file(
+    ${CMAKE_SOURCE_DIR}/basic_blocks_basic_cpp.pslkp.yaml.in
+    ${CMAKE_BINARY_DIR}/basic_blocks_basic_cpp.${PROJECT_VERSION_UNDERSCORE}.pslkp.yaml
+    @ONLY
+)
+
+install(FILES ${CMAKE_BINARY_DIR}/basic_blocks_basic_cpp.${PROJECT_VERSION_UNDERSCORE}.pslkp.yaml
+    DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 
 
@@ -67,8 +79,14 @@ install(EXPORT BlockLibrariesBasicBlocksBasicCppTargets
 
 # Set the include directories and libraries for the package
 set(PACKAGE_INCLUDE_DIRS "${CMAKE_INSTALL_PREFIX}/include")
-set(PACKAGE_LIBRARIES "${CMAKE_INSTALL_PREFIX}/lib/pysyslink_plugins/basic_blocks_basic_cpp")
+set(PACKAGE_LIBRARIES "${CMAKE_INSTALL_PREFIX}/${PLUGIN_INSTALL_DIR}")
 
+
+write_basic_package_version_file(
+    "${CMAKE_CURRENT_BINARY_DIR}/BlockLibrariesBasicBlocksBasicCppConfigVersion.cmake"
+    VERSION ${PROJECT_VERSION}
+    COMPATIBILITY AnyNewerVersion
+)
 
 # Create and install the config file
 configure_package_config_file(
@@ -76,7 +94,9 @@ configure_package_config_file(
     ${CMAKE_BINARY_DIR}/BlockLibrariesBasicBlocksBasicCppConfig.cmake
     INSTALL_DESTINATION lib/cmake/BlockLibrariesBasicBlocksBasicCpp
 )
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/BlockLibrariesBasicBlocksBasicCppConfig.cmake
+install(
+    FILES ${CMAKE_CURRENT_BINARY_DIR}/BlockLibrariesBasicBlocksBasicCppConfig.cmake
+    FILES ${CMAKE_CURRENT_BINARY_DIR}/BlockLibrariesBasicBlocksBasicCppConfigVersion.cmake
     DESTINATION lib/cmake/BlockLibrariesBasicBlocksBasicCpp
 )
 

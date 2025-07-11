@@ -1,7 +1,11 @@
 pluginName: basic_blocks_basic_cpp
 pluginType: coreBlockLibrary
 blockType: BasicCpp
-dynamicLibrary: libBlockLibrariesBasicBlocksBasicCpp.so
+version: @PROJECT_VERSION@
+dependsOn:
+  - name: BlockTypesBasicCpp
+    version: @BLOCK_TYPES_BASIC_CPP_VERSION@
+dynamicLibrary: libBlockLibrariesBasicBlocksBasicCpp-@PROJECT_VERSION@.so
 blockLibraries:
   - name: BasicBlocks
     blockTypes:

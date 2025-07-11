@@ -11,8 +11,21 @@ add_library(BlockLibrariesBasicBlocksBasicCpp SHARED
     Gain.cpp
 )
 
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+
 target_include_directories(BlockLibrariesBasicBlocksBasicCpp PRIVATE ${CMAKE_SOURCE_DIR}/src)
-target_link_libraries(BlockLibrariesBasicBlocksBasicCpp PRIVATE BlockTypesBasicCpp)
+target_link_libraries(BlockLibrariesBasicBlocksBasicCpp PRIVATE BlockTypes::BasicCpp::BlockTypesBasicCpp)
+
+target_include_directories(BlockLibrariesBasicBlocksBasicCpp PUBLIC ${BlockTypesBasicCpp_INCLUDE_DIRS})
+
+set_target_properties(BlockLibrariesBasicBlocksBasicCpp PROPERTIES 
+    POSITION_INDEPENDENT_CODE ON
+    VERSION ${PROJECT_VERSION}
+    IMPORTED_LOCATION "${CMAKE_INSTALL_PREFIX}${INSTALLED_DYNAMIC_LIB_NAME}.so"
+    OUTPUT_NAME "${INSTALLED_DYNAMIC_LIB_NAME}"
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+)
 
 # Include directories for header files
 target_include_directories(BlockLibrariesBasicBlocksBasicCpp

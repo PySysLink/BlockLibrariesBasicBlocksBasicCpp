@@ -1,5 +1,8 @@
 @PACKAGE_INIT@
 
+include(CMakeFindDependencyMacro)
+find_dependency(BlockTypesBasicCpp REQUIRED)
+
 # Specify the include directories and libraries
 set_and_check(BLOCK_LIBRARIES_BASIC_BLOCKS_BASIC_CPP_INCLUDE_DIRS "@PACKAGE_INCLUDE_DIRS@")
 set_and_check(BLOCK_LIBRARIES_BASIC_BLOCKS_BASIC_CPP_LIBRARIES "@PACKAGE_LIBRARIES@")
@@ -7,3 +10,5 @@ set_and_check(BLOCK_LIBRARIES_BASIC_BLOCKS_BASIC_CPP_LIBRARIES "@PACKAGE_LIBRARI
 # Set include directories for BlockTypeSupportsBasicCppSupport
 set(BlockLibrariesBasicBlocksBasicCpp_INCLUDE_DIRS "${CMAKE_INSTALL_PREFIX}/include")
 set(BlockLibrariesBasicBlocksBasicCpp_LIBRARIES "@PACKAGE_LIBRARIES@")
+
+include("${CMAKE_CURRENT_LIST_DIR}/BlockLibrariesBasicBlocksBasicCppTargets.cmake")
