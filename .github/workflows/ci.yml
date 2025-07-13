@@ -49,6 +49,6 @@ jobs:
         with:
           name: BlockLibrariesBasicBlocksBasicCpp-artifacts
           path: |
-            build/basic_cpp_support.*.pslkp.yaml
-            build/*.so
+            build/basic_blocks_basic_cpp.*.pslkp.yaml
+            build/src/libBlockLibrariesBasicBlocksBasicCpp*
     
