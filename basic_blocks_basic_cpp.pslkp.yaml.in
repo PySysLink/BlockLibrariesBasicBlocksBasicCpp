@@ -15,7 +15,7 @@ blockLibraries:
             defaultValue: 0
             type: float
           - name: SampleTime
-            defaultValue: -1
+            defaultValue: 1
             type: float
       - name: Adder
         configurationValues:
@@ -36,7 +36,7 @@ blockLibraries:
             defaultValue: 1
             type: int
           - name: DiscreteSampleTime
-            defaultValue: -1
+            defaultValue: 1.0
             type: float
       - name: Display
       - name: Integrator
@@ -46,7 +46,7 @@ blockLibraries:
             type: float
           - name: ContinuousSampleTimeGroup
             defaultValue: 1
-            type: float
+            type: int
       - name: Gain
         configurationValues:
           - name: Gain 
