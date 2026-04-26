@@ -58,12 +58,12 @@ install(TARGETS BlockLibrariesBasicBlocksBasicCpp
 )
 
 configure_file(
-    ${CMAKE_SOURCE_DIR}/basic_blocks_basic_cpp.pslkp.yaml.in
-    ${CMAKE_BINARY_DIR}/basic_blocks_basic_cpp.${PROJECT_VERSION_UNDERSCORE}.pslkp.yaml
+    ${CMAKE_SOURCE_DIR}/basic_blocks_basic_cpp.pslkblp.yaml.in
+    ${CMAKE_BINARY_DIR}/basic_blocks_basic_cpp.${PROJECT_VERSION_UNDERSCORE}.pslkblp.yaml
     @ONLY
 )
 
-install(FILES ${CMAKE_BINARY_DIR}/basic_blocks_basic_cpp.${PROJECT_VERSION_UNDERSCORE}.pslkp.yaml
+install(FILES ${CMAKE_BINARY_DIR}/basic_blocks_basic_cpp.${PROJECT_VERSION_UNDERSCORE}.pslkblp.yaml
     DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 
