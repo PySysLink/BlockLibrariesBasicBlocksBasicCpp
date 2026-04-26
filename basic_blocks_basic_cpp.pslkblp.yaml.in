@@ -9,17 +9,24 @@ dynamicLibrary: libBlockLibrariesBasicBlocksBasicCpp-@PROJECT_VERSION@.so
 commonBlocks:
   - name: TypedBlock
     configurationValues:
+      - name: DataTypeCategory
+        defaultValue: FullySupportedSignalValue
+        type: options(Inherited, FullySupportedSignalValue)
       - name: DataType
         defaultValue: double
         type: enum(FullySupportedSignalValueType)
     inputPortTypes:
       all: 
-        port_category: FullySupportedSignalValue
+        port_category: DataTypeCategory
         signal_value_type: DataType
+        supported_port_types_for_inheritance: 
+          - FullySupportedSignalValueType.Any
     outputPortTypes:
       all:
-        port_category: FullySupportedSignalValue
+        port_category: DataTypeCategory
         signal_value_type: DataType
+        supported_port_types_for_inheritance: 
+          - FullySupportedSignalValueType.Any
 blockLibraries:
   - name: BasicBlocks
     blockTypes:

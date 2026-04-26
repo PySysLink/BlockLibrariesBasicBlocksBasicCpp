@@ -2,24 +2,23 @@
 #define SRC_BASIC_CPP_FACTORY
 
 #include <memory>
-#include <BlockTypes/BasicCpp/SimulationBlock.h>
+#include <PySysLinkBase/ISimulationBlock.h>
 #include <map>
-#include <BlockTypes/BasicCpp/ConfigurationValue.h>
-#include <BlockTypes/BasicCpp/IBasicCppBlockFactory.h>
+#include <PySysLinkBase/ConfigurationValue.h>
+#include <BlockTypeSupports/BasicCppSupport/IBasicCppBlockFactory.h>
 #include <string>
 #include <vector>
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
-   template <typename T>
-      class BasicCppFactory : public BlockTypes::BasicCpp::IBasicCppBlockFactory<T> {
+      class BasicCppFactory : public BlockTypeSupports::BasicCppSupport::IBasicCppBlockFactory {
+         protected:
+         template <typename T>
+         std::unique_ptr<PySysLinkBase::ISimulationBlock> CreateBlockTyped(std::string blockClass, std::map<std::string, PySysLinkBase::ConfigurationValue> blockConfiguration, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> blockEventsHandler);
          public:
          std::vector<std::string> GetSupportedBlockClasses() const;
-         std::unique_ptr<BlockTypes::BasicCpp::SimulationBlock<T>> CreateBlock(std::string blockClass, std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> blockConfiguration, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler);
+         std::unique_ptr<PySysLinkBase::ISimulationBlock> CreateBlock(std::string blockClass, std::map<std::string, PySysLinkBase::ConfigurationValue> blockConfiguration, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> blockEventsHandler);
       };
-
-   extern template class BasicCppFactory<double>;
-   extern template class BasicCppFactory<std::complex<double>>;
 } // BlockLibraries::BasicBlocksBasicCpp 
 
 

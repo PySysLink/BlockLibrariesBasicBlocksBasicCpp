@@ -9,8 +9,7 @@
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
-    template <typename T>
-    std::vector<std::string> BasicCppFactory<T>::GetSupportedBlockClasses() const
+    std::vector<std::string> BasicCppFactory::GetSupportedBlockClasses() const
     {
         return {"BasicBlocks/Constant",
                 "BasicBlocks/Adder",
@@ -21,8 +20,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
                 "BasicBlocks/Gain"};
     }
 
-    template <typename T>
-    std::unique_ptr<BlockTypes::BasicCpp::SimulationBlock<T>> BasicCppFactory<T>::CreateBlock(std::string blockClass, std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> blockConfiguration, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler)
+    std::unique_ptr<PySysLinkBase::ISimulationBlock> BasicCppFactory::CreateBlock(std::string blockClass, std::map<std::string, PySysLinkBase::ConfigurationValue> blockConfiguration, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> blockEventsHandler)
     {
         if (blockClass == "BasicBlocks/Constant")
         {
