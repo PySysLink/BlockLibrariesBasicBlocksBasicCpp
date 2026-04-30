@@ -1,23 +1,12 @@
 # Define a library
 add_library(BlockLibrariesBasicBlocksBasicCpp SHARED
-    Constant.cpp
-    Display.cpp
-    Adder.cpp 
-    BasicCppFactory.cpp
-    Accumulator.cpp
-    Integrator.cpp
-    ContinuousToDiscrete.cpp
     RegisterBasicCppFactories.cpp
-    Gain.cpp
 )
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-
 target_include_directories(BlockLibrariesBasicBlocksBasicCpp PRIVATE ${CMAKE_SOURCE_DIR}/src)
-target_link_libraries(BlockLibrariesBasicBlocksBasicCpp PRIVATE BlockTypes::BasicCpp::BlockTypesBasicCpp)
 
-target_include_directories(BlockLibrariesBasicBlocksBasicCpp PUBLIC ${BlockTypesBasicCpp_INCLUDE_DIRS})
 
 set_target_properties(BlockLibrariesBasicBlocksBasicCpp PROPERTIES 
     POSITION_INDEPENDENT_CODE ON

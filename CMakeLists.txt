@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.11)
 
 set(PROJECT_VERSION "0.1.0")
-set(BLOCK_TYPES_BASIC_CPP_VERSION "0.1.0")
+set(BLOCK_TYPE_SUPPORTS_BASIC_CPP_VERSION "0.1.0")
+set(PYSYSLINK_BASE_VERSION "0.1.0")
 set(PROJECT_VERSION_UNDERSCORE "0_1_0")
 
 # Project name and version
@@ -32,7 +33,7 @@ endif()
 message(STATUS "Default install path: ${CMAKE_INSTALL_PREFIX}")
 
 # Locate PySysLinkBase
-find_package(BlockTypesBasicCpp ${BLOCK_TYPES_BASIC_CPP_VERSION} REQUIRED)
+find_package(PySysLinkBase ${PYSYSLINK_BASE_VERSION} REQUIRED)
 
 # Add subdirectories
 add_subdirectory(src)

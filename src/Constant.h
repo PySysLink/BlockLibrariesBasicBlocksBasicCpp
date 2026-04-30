@@ -1,32 +1,80 @@
 #ifndef SRC_BASIC_BLOCKS_CONSTANT
 #define SRC_BASIC_BLOCKS_CONSTANT
 
-#include <BlockTypes/BasicCpp/SimulationBlock.h>
-#include <BlockTypes/BasicCpp/SampleTime.h>
-#include <BlockTypes/BasicCpp/ConfigurationValue.h>
+#include <map>
+#include <vector>
+#include <variant>
+#include <BlockTypeSupports/BasicCppSupport/SimulationBlockCpp.h>
+#include <PySysLinkBase/SampleTime.h>
+#include <PySysLinkBase/ConfigurationValue.h>
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
     template <typename T>
-    class Constant : public BlockTypes::BasicCpp::SimulationBlock<T>
+    class Constant : public BlockTypeSupports::BasicCppSupport::SimulationBlockCpp<T>
     {
         private:
             T value;
-            std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime;
+            std::shared_ptr<PySysLinkBase::SampleTime> sampleTime;
         public:
-            Constant(std::map<std::string, BlockTypes::BasicCpp::ConfigurationValue> configurationValues, std::shared_ptr<BlockTypes::BasicCpp::IEventHandler> eventHandler);
-            const std::shared_ptr<BlockTypes::BasicCpp::SampleTime> GetSampleTime() const;
+            Constant(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler);
             const int GetInputPortAmount() const;
             const int GetOutputPortAmount() const;
             const std::vector<bool> InputsHasDirectFeedthrough() const;
 
-            std::vector<T> CalculateOutputs(const std::vector<T> inputs, std::shared_ptr<BlockTypes::BasicCpp::SampleTime> sampleTime, double currentTime, bool isMinorStep=false);
+            std::vector<T> ComputeOutputsOfCppBlock(const std::vector<T> inputs, std::shared_ptr<PySysLinkBase::SampleTime> sampleTime, double currentTime, bool isMinorStep=false) override;
 
-            bool TryUpdateConfigurationValue(std::string keyName, BlockTypes::BasicCpp::ConfigurationValue value) override;
+            bool _TryUpdateConfigurationValue(std::string keyName, PySysLinkBase::ConfigurationValue value) override;
     };
 
-    extern template class Constant<double>;
-    extern template class Constant<std::complex<double>>;
-} // namespace BasicBlocks
+    template <typename T>
+    Constant<T>::Constant(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler) : BlockTypeSupports::BasicCppSupport::SimulationBlockCpp<T>(configurationValues, eventHandler)
+    {
+        this->value = PySysLinkBase::ConfigurationValueManager::TryGetConfigurationValue<T>("Value", configurationValues);
+        this->sampleTime = std::make_shared<PySysLinkBase::SampleTime>(PySysLinkBase::SampleTimeType::constant);
+    }
+
+    template <typename T>
+    const int Constant<T>::GetInputPortAmount() const
+    {
+        return 0;
+    }
+
+    template <typename T>
+    const int Constant<T>::GetOutputPortAmount() const
+    {
+        return 1;
+    }
+
+    template <typename T>
+    const std::vector<bool> Constant<T>::InputsHasDirectFeedthrough() const
+    {
+        return {};
+    }
+
+    template <typename T>
+    std::vector<T> Constant<T>::ComputeOutputsOfCppBlock(const std::vector<T> inputs, std::shared_ptr<PySysLinkBase::SampleTime> sampleTime, double currentTime, bool isMinorStep)
+    {
+        return {this->value};
+    }
+
+    template <typename T>
+    bool Constant<T>::_TryUpdateConfigurationValue(std::string keyName, PySysLinkBase::ConfigurationValue value)
+    {
+        if (keyName == "Value")
+        {
+            try
+            {
+                this->value = std::get<T>(value);
+                return true;
+            }
+            catch(const std::bad_variant_access&)
+            {
+                return false;
+            }
+        }
+        return false;
+    }
+} // namespace BlockLibraries::BasicBlocksBasicCpp
 
 #endif /* SRC_BASIC_BLOCKS_CONSTANT */
