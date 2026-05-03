@@ -22,7 +22,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
             const int GetOutputPortAmount() const;
             const std::vector<bool> InputsHasDirectFeedthrough() const;
 
-            std::vector<T> ComputeOutputsOfCppBlock(const std::vector<T> inputs, std::shared_ptr<PySysLinkBase::SampleTime> sampleTime, double currentTime, bool isMinorStep=false) override;
+            std::vector<T> ComputeOutputsOfCppBlock(const std::vector<T> inputs, const std::shared_ptr<PySysLinkBase::SampleTime> sampleTime, double currentTime, bool isMinorStep=false) override;
             const std::vector<double> GetContinuousStates() const;
             void SetContinuousStates(std::vector<double> newStates);
             const std::vector<double> GetContinuousStateDerivativesOfCppBlock(const std::vector<T> inputs, const std::shared_ptr<PySysLinkBase::SampleTime> sampleTime, double currentTime) const;
@@ -72,7 +72,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     }
 
     template <typename T>
-    std::vector<T> Integrator<T>::ComputeOutputsOfCppBlock(const std::vector<T> inputs, std::shared_ptr<PySysLinkBase::SampleTime> sampleTime, double currentTime, bool isMinorStep)
+    std::vector<T> Integrator<T>::ComputeOutputsOfCppBlock(const std::vector<T> inputs, const std::shared_ptr<PySysLinkBase::SampleTime> sampleTime, double currentTime, bool isMinorStep)
     {
         return {static_cast<T>(this->integratorValue)};
     }
