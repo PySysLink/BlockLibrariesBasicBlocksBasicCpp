@@ -20,7 +20,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
             Constant(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler);
             const int GetInputPortAmount() const;
             const int GetOutputPortAmount() const;
-            const std::vector<bool> InputsHasDirectFeedthrough() const;
+            const std::vector<bool> InputsHasDirectFeedthrough() const override;
 
             std::vector<T> ComputeOutputsOfCppBlock(const std::vector<T> inputs, std::shared_ptr<PySysLinkBase::SampleTime> sampleTime, double currentTime, bool isMinorStep=false) override;
 
