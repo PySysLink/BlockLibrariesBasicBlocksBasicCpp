@@ -14,13 +14,9 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     class Integrator : public BlockTypeSupports::BasicCppSupport::SimulationBlockCppWithContinuousStates<T>
     {
         private:
-            std::shared_ptr<PySysLinkBase::SampleTime> sampleTime;
             double integratorValue;
         public:
             Integrator(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler);
-            const int GetInputPortAmount() const;
-            const int GetOutputPortAmount() const;
-            const std::vector<bool> InputsHasDirectFeedthrough() const;
 
             std::vector<T> ComputeOutputsOfCppBlock(const std::vector<T> inputs, const std::shared_ptr<PySysLinkBase::SampleTime> sampleTime, double currentTime, bool isMinorStep=false) override;
             const std::vector<double> GetContinuousStates() const;
@@ -30,7 +26,8 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     };
 
     template <typename T>
-    Integrator<T>::Integrator(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler) : BlockTypeSupports::BasicCppSupport::SimulationBlockCppWithContinuousStates<T>(configurationValues, eventHandler)
+    Integrator<T>::Integrator(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler) 
+        : BlockTypeSupports::BasicCppSupport::SimulationBlockCppWithContinuousStates<T>(configurationValues, eventHandler, 1, 1, {false})
     {
         try
         {
@@ -51,24 +48,6 @@ namespace BlockLibraries::BasicBlocksBasicCpp
             continuousSampleTimeGroup = 0;
         }
         this->sampleTime = std::make_shared<PySysLinkBase::SampleTime>(PySysLinkBase::SampleTimeType::continuous, continuousSampleTimeGroup);
-    }
-
-    template <typename T>
-    const int Integrator<T>::GetInputPortAmount() const
-    {
-        return 1;
-    }
-
-    template <typename T>
-    const int Integrator<T>::GetOutputPortAmount() const
-    {
-        return 1;
-    }
-
-    template <typename T>
-    const std::vector<bool> Integrator<T>::InputsHasDirectFeedthrough() const
-    {
-        return {false};
     }
 
     template <typename T>

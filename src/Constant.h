@@ -15,12 +15,8 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     {
         private:
             T value;
-            std::shared_ptr<PySysLinkBase::SampleTime> sampleTime;
         public:
             Constant(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler);
-            const int GetInputPortAmount() const;
-            const int GetOutputPortAmount() const;
-            const std::vector<bool> InputsHasDirectFeedthrough() const override;
 
             std::vector<T> ComputeOutputsOfCppBlock(const std::vector<T> inputs, std::shared_ptr<PySysLinkBase::SampleTime> sampleTime, double currentTime, bool isMinorStep=false) override;
 
@@ -28,28 +24,11 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     };
 
     template <typename T>
-    Constant<T>::Constant(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler) : BlockTypeSupports::BasicCppSupport::SimulationBlockCpp<T>(configurationValues, eventHandler)
+    Constant<T>::Constant(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler) 
+        : BlockTypeSupports::BasicCppSupport::SimulationBlockCpp<T>(configurationValues, eventHandler, 0, 1, {})
     {
         this->value = PySysLinkBase::ConfigurationValueManager::TryGetConfigurationValue<T>("Value", configurationValues);
         this->sampleTime = std::make_shared<PySysLinkBase::SampleTime>(PySysLinkBase::SampleTimeType::constant);
-    }
-
-    template <typename T>
-    const int Constant<T>::GetInputPortAmount() const
-    {
-        return 0;
-    }
-
-    template <typename T>
-    const int Constant<T>::GetOutputPortAmount() const
-    {
-        return 1;
-    }
-
-    template <typename T>
-    const std::vector<bool> Constant<T>::InputsHasDirectFeedthrough() const
-    {
-        return {};
     }
 
     template <typename T>

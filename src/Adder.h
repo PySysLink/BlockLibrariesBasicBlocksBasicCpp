@@ -16,12 +16,18 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     {
         private:
             std::vector<T> gains;
-            std::shared_ptr<PySysLinkBase::SampleTime> sampleTime;
+
+            static std::vector<T> ExtractGains(const std::map<std::string, PySysLinkBase::ConfigurationValue>& config)
+            {
+                return PySysLinkBase::ConfigurationValueManager::TryGetConfigurationValue<std::vector<T>>("Gains", config);
+            }
+
+            static std::vector<bool> BuildDirectFeedthrough(size_t n)
+            {
+                return std::vector<bool>(n, true);
+            }
         public:
             Adder(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler);
-            const int GetInputPortAmount() const;
-            const int GetOutputPortAmount() const;
-            const std::vector<bool> InputsHasDirectFeedthrough() const;
 
             std::vector<T> ComputeOutputsOfCppBlock(const std::vector<T> inputs, std::shared_ptr<PySysLinkBase::SampleTime> sampleTime, double currentTime, bool isMinorStep=false) override;
 
@@ -29,37 +35,14 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     };
 
     template <typename T>
-    Adder<T>::Adder(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler) : BlockTypeSupports::BasicCppSupport::SimulationBlockCpp<T>(configurationValues, eventHandler)
+    Adder<T>::Adder(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler) 
+        : gains(ExtractGains(configurationValues)), BlockTypeSupports::BasicCppSupport::SimulationBlockCpp<T>(configurationValues, eventHandler, static_cast<int>(gains.size()), 1, BuildDirectFeedthrough(gains.size()))
     {
-        this->gains = PySysLinkBase::ConfigurationValueManager::TryGetConfigurationValue<std::vector<T>>("Gains", configurationValues);
+
         this->sampleTime = std::make_shared<PySysLinkBase::SampleTime>(PySysLinkBase::SampleTimeType::inherited,
                                                                      std::vector<PySysLinkBase::SampleTimeType>{PySysLinkBase::SampleTimeType::constant,
                                                                                                                 PySysLinkBase::SampleTimeType::continuous,
                                                                                                                 PySysLinkBase::SampleTimeType::discrete});
-    }
-
-    template <typename T>
-    const int Adder<T>::GetInputPortAmount() const
-    {
-        return static_cast<int>(this->gains.size());
-    }
-
-    template <typename T>
-    const int Adder<T>::GetOutputPortAmount() const
-    {
-        return 1;
-    }
-
-    template <typename T>
-    const std::vector<bool> Adder<T>::InputsHasDirectFeedthrough() const
-    {
-        std::vector<bool> result;
-        result.reserve(this->gains.size());
-        for (size_t i = 0; i < this->gains.size(); ++i)
-        {
-            result.push_back(true);
-        }
-        return result;
     }
 
     template <typename T>

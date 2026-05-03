@@ -14,12 +14,8 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     {
         private:
             T gain;
-            std::shared_ptr<PySysLinkBase::SampleTime> sampleTime;
         public:
             Gain(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler);
-            const int GetInputPortAmount() const;
-            const int GetOutputPortAmount() const;
-            const std::vector<bool> InputsHasDirectFeedthrough() const;
 
             std::vector<T> ComputeOutputsOfCppBlock(const std::vector<T> inputs, std::shared_ptr<PySysLinkBase::SampleTime> sampleTime, double currentTime, bool isMinorStep=false) override;
 
@@ -27,31 +23,14 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     };
 
     template <typename T>
-    Gain<T>::Gain(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler) : BlockTypeSupports::BasicCppSupport::SimulationBlockCpp<T>(configurationValues, eventHandler)
+    Gain<T>::Gain(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler) 
+        : BlockTypeSupports::BasicCppSupport::SimulationBlockCpp<T>(configurationValues, eventHandler, 1, 1, {true})
     {
         this->gain = PySysLinkBase::ConfigurationValueManager::TryGetConfigurationValue<T>("Gain", configurationValues);
         this->sampleTime = std::make_shared<PySysLinkBase::SampleTime>(PySysLinkBase::SampleTimeType::inherited,
                                                                      std::vector<PySysLinkBase::SampleTimeType>{PySysLinkBase::SampleTimeType::constant,
                                                                                                                 PySysLinkBase::SampleTimeType::continuous,
                                                                                                                 PySysLinkBase::SampleTimeType::discrete});
-    }
-
-    template <typename T>
-    const int Gain<T>::GetInputPortAmount() const
-    {
-        return 1;
-    }
-
-    template <typename T>
-    const int Gain<T>::GetOutputPortAmount() const
-    {
-        return 1;
-    }
-
-    template <typename T>
-    const std::vector<bool> Gain<T>::InputsHasDirectFeedthrough() const
-    {
-        return {true};
     }
 
     template <typename T>

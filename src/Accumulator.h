@@ -12,7 +12,6 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     class Accumulator : public BlockTypeSupports::BasicCppSupport::SimulationBlockCpp<T>
     {
         private:
-            std::shared_ptr<PySysLinkBase::SampleTime> sampleTime;
             T value;
             double sampleTimeValue;
         public:
@@ -25,7 +24,8 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     };
 
     template <typename T>
-    Accumulator<T>::Accumulator(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler) : BlockTypeSupports::BasicCppSupport::SimulationBlockCpp<T>(configurationValues, eventHandler)
+    Accumulator<T>::Accumulator(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler) 
+        : BlockTypeSupports::BasicCppSupport::SimulationBlockCpp<T>(configurationValues, eventHandler, 1, 1, {false})
     {
         try
         {
@@ -37,24 +37,6 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         }
         this->sampleTimeValue = PySysLinkBase::ConfigurationValueManager::TryGetConfigurationValue<double>("SampleTime", configurationValues);
         this->sampleTime = std::make_shared<PySysLinkBase::SampleTime>(PySysLinkBase::SampleTimeType::discrete, this->sampleTimeValue);
-    }
-
-    template <typename T>
-    const int Accumulator<T>::GetInputPortAmount() const
-    {
-        return 1;
-    }
-
-    template <typename T>
-    const int Accumulator<T>::GetOutputPortAmount() const
-    {
-        return 1;
-    }
-
-    template <typename T>
-    const std::vector<bool> Accumulator<T>::InputsHasDirectFeedthrough() const
-    {
-        return {false};
     }
 
     template <typename T>

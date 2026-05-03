@@ -16,23 +16,20 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     class ContinuousToDiscrete : public BlockTypeSupports::BasicCppSupport::SimulationBlockCpp<T>
     {
         private:
-            std::shared_ptr<PySysLinkBase::SampleTime> sampleTime;
             T bufferedValue;
             int continuousSampleTimeGroup = -1;
             double sampleTimeValue = std::numeric_limits<double>::quiet_NaN();
             double simulationStartTime = std::numeric_limits<double>::quiet_NaN();
         public:
             ContinuousToDiscrete(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler);
-            const int GetInputPortAmount() const;
-            const int GetOutputPortAmount() const;
-            const std::vector<bool> InputsHasDirectFeedthrough() const;
 
             std::vector<T> ComputeOutputsOfCppBlock(const std::vector<T> inputs, std::shared_ptr<PySysLinkBase::SampleTime> sampleTime, double currentTime, bool isMinorStep=false) override;
             const std::vector<double> GetKnownEvents(const std::shared_ptr<PySysLinkBase::SampleTime> resolvedSampleTime, double simulationStartTime, double simulationEndTime) const override;
     };
 
     template <typename T>
-    ContinuousToDiscrete<T>::ContinuousToDiscrete(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler) : BlockTypeSupports::BasicCppSupport::SimulationBlockCpp<T>(configurationValues, eventHandler)
+    ContinuousToDiscrete<T>::ContinuousToDiscrete(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler) 
+        : BlockTypeSupports::BasicCppSupport::SimulationBlockCpp<T>(configurationValues, eventHandler, 1, 1, {true})
     {
         std::vector<std::shared_ptr<PySysLinkBase::SampleTime>> multirateSampleTimes = {};
         int inputMultirateSampleTimeIndex = 0;
@@ -60,24 +57,6 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         }
 
         this->sampleTime = std::make_shared<PySysLinkBase::SampleTime>(PySysLinkBase::SampleTimeType::multirate, multirateSampleTimes, inputMultirateSampleTimeIndex, outputMultirateSampleTimeIndex);
-    }
-
-    template <typename T>
-    const int ContinuousToDiscrete<T>::GetInputPortAmount() const
-    {
-        return 1;
-    }
-
-    template <typename T>
-    const int ContinuousToDiscrete<T>::GetOutputPortAmount() const
-    {
-        return 1;
-    }
-
-    template <typename T>
-    const std::vector<bool> ContinuousToDiscrete<T>::InputsHasDirectFeedthrough() const
-    {
-        return {true};
     }
 
     template <typename T>
