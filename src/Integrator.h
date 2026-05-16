@@ -16,7 +16,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         private:
             double integratorValue;
         public:
-            Integrator(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler);
+            Integrator(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler, int inputPortNumber, int outputPortNumber);
 
             std::vector<T> ComputeOutputsOfCppBlock(const std::vector<T> inputs, const std::shared_ptr<PySysLinkBase::SampleTime> sampleTime, double currentTime, bool isMinorStep=false) override;
             const std::vector<double> GetContinuousStates() const;
@@ -26,8 +26,8 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     };
 
     template <typename T>
-    Integrator<T>::Integrator(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler) 
-        : BlockTypeSupports::BasicCppSupport::SimulationBlockCppWithContinuousStates<T>(configurationValues, eventHandler, 1, 1, {false})
+    Integrator<T>::Integrator(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler, int inputPortNumber, int outputPortNumber)
+        : BlockTypeSupports::BasicCppSupport::SimulationBlockCppWithContinuousStates<T>(configurationValues, eventHandler, inputPortNumber, outputPortNumber, false)
     {
         try
         {

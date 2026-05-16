@@ -17,17 +17,8 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         private:
             std::vector<T> gains;
 
-            static std::vector<T> ExtractGains(const std::map<std::string, PySysLinkBase::ConfigurationValue>& config)
-            {
-                return PySysLinkBase::ConfigurationValueManager::TryGetConfigurationValue<std::vector<T>>("Gains", config);
-            }
-
-            static std::vector<bool> BuildDirectFeedthrough(size_t n)
-            {
-                return std::vector<bool>(n, true);
-            }
         public:
-            Adder(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler);
+            Adder(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler, int inputPortNumber, int outputPortNumber);
 
             std::vector<T> ComputeOutputsOfCppBlock(const std::vector<T> inputs, std::shared_ptr<PySysLinkBase::SampleTime> sampleTime, double currentTime, bool isMinorStep=false) override;
 
@@ -35,10 +26,10 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     };
 
     template <typename T>
-    Adder<T>::Adder(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler) 
-        : gains(ExtractGains(configurationValues)), BlockTypeSupports::BasicCppSupport::SimulationBlockCpp<T>(configurationValues, eventHandler, static_cast<int>(gains.size()), 1, BuildDirectFeedthrough(gains.size()))
+    Adder<T>::Adder(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler, int inputPortNumber, int outputPortNumber)
+        : BlockTypeSupports::BasicCppSupport::SimulationBlockCpp<T>(configurationValues, eventHandler, inputPortNumber, outputPortNumber, true)
     {
-
+        this->gains = PySysLinkBase::ConfigurationValueManager::TryGetConfigurationValue<std::vector<T>>("Gains", configurationValues);
         this->sampleTime = std::make_shared<PySysLinkBase::SampleTime>(PySysLinkBase::SampleTimeType::inherited,
                                                                      std::vector<PySysLinkBase::SampleTimeType>{PySysLinkBase::SampleTimeType::constant,
                                                                                                                 PySysLinkBase::SampleTimeType::continuous,

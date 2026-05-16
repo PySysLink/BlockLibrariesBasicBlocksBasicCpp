@@ -31,31 +31,31 @@ namespace BlockLibraries::BasicBlocksBasicCpp
            
 
             template <typename T>
-            std::unique_ptr<PySysLinkBase::ISimulationBlock> CreateBlockTyped(const std::string& blockClass, const ConfigMap& cfg, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> handler)
+            std::unique_ptr<PySysLinkBase::ISimulationBlock> CreateBlockTyped(const std::string& blockClass, const ConfigMap& cfg, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> handler, int inputPortAmmount, int outputPortAmmount)
             {
                   if (blockClass == "BasicBlocks/Constant")
-                        return std::make_unique<Constant<T>>(cfg, handler);
+                        return std::make_unique<Constant<T>>(cfg, handler, inputPortAmmount, outputPortAmmount);
 
                   if (blockClass == "BasicBlocks/Adder")
-                        return std::make_unique<Adder<T>>(cfg, handler);
+                        return std::make_unique<Adder<T>>(cfg, handler, inputPortAmmount, outputPortAmmount);
 
                   if (blockClass == "BasicBlocks/Display")
-                        return std::make_unique<Display<T>>(cfg, handler);
+                        return std::make_unique<Display<T>>(cfg, handler, inputPortAmmount, outputPortAmmount);
 
                   if (blockClass == "BasicBlocks/Accumulator")
-                        return std::make_unique<Accumulator<T>>(cfg, handler);
+                        return std::make_unique<Accumulator<T>>(cfg, handler, inputPortAmmount, outputPortAmmount);
 
                   if (blockClass == "BasicBlocks/ContinuousToDiscrete")
-                        return std::make_unique<ContinuousToDiscrete<T>>(cfg, handler);
+                        return std::make_unique<ContinuousToDiscrete<T>>(cfg, handler, inputPortAmmount, outputPortAmmount);
 
                   if (blockClass == "BasicBlocks/Gain")
                         if constexpr (std::is_same_v<T, double>) {
-                              return std::make_unique<Gain<double>>(cfg, handler);
+                              return std::make_unique<Gain<double>>(cfg, handler, inputPortAmmount, outputPortAmmount);
                         }
                         else if constexpr (std::is_same_v<T, int>) {
-                              return std::make_unique<Gain<int>>(cfg, handler);
+                              return std::make_unique<Gain<int>>(cfg, handler, inputPortAmmount, outputPortAmmount);
                         } else if constexpr (std::is_same_v<T, std::complex<double>>) {
-                              return std::make_unique<Gain<std::complex<double>>>(cfg, handler);
+                              return std::make_unique<Gain<std::complex<double>>>(cfg, handler, inputPortAmmount, outputPortAmmount);
                         } else {
                               throw std::invalid_argument("Gain does not support bool.");
                         }
@@ -67,7 +67,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
                               throw std::invalid_argument("Integrator only supports double.");
                         }
 
-                        return std::make_unique<Integrator<double>>(cfg, handler);
+                        return std::make_unique<Integrator<double>>(cfg, handler, inputPortAmmount, outputPortAmmount);
                   }
 
                   throw std::out_of_range("Block type not found: " + blockClass);
@@ -159,7 +159,9 @@ namespace BlockLibraries::BasicBlocksBasicCpp
             }
 
             
-            std::unique_ptr<PySysLinkBase::ISimulationBlock> CreateBlock(std::string blockClass, std::map<std::string, PySysLinkBase::ConfigurationValue> blockConfiguration, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> blockEventsHandler) override
+            std::unique_ptr<PySysLinkBase::ISimulationBlock> CreateBlock(std::string blockClass, std::map<std::string, PySysLinkBase::ConfigurationValue> blockConfiguration, 
+                                                                         std::shared_ptr<PySysLinkBase::IBlockEventsHandler> blockEventsHandler,
+                                                                         int inputPortAmmount, int outputPortAmmount) override
             {
                   auto inputTypes = PySysLinkBase::ParsePortTypeMetadatas(
                   PySysLinkBase::ConfigurationValueManager::TryGetConfigurationValue<std::vector<std::string>>(
@@ -187,19 +189,19 @@ namespace BlockLibraries::BasicBlocksBasicCpp
 
                   if (dataType == "int")
                   {
-                        return CreateBlockTyped<int>(blockClass, blockConfiguration, blockEventsHandler);
+                        return CreateBlockTyped<int>(blockClass, blockConfiguration, blockEventsHandler, inputPortAmmount, outputPortAmmount);
                   }
                   else if (dataType == "double")
                   {
-                        return CreateBlockTyped<double>(blockClass, blockConfiguration, blockEventsHandler);
+                        return CreateBlockTyped<double>(blockClass, blockConfiguration, blockEventsHandler, inputPortAmmount, outputPortAmmount);
                   }
                   else if (dataType == "complex_double")
                   {
-                        return CreateBlockTyped<std::complex<double>>(blockClass, blockConfiguration, blockEventsHandler);
+                        return CreateBlockTyped<std::complex<double>>(blockClass, blockConfiguration, blockEventsHandler, inputPortAmmount, outputPortAmmount);
                   }
                   else if (dataType == "bool")
                   {
-                        return CreateBlockTyped<bool>(blockClass, blockConfiguration, blockEventsHandler);
+                        return CreateBlockTyped<bool>(blockClass, blockConfiguration, blockEventsHandler, inputPortAmmount, outputPortAmmount);
                   }
                   // else if (dataType == "string")
                   // {

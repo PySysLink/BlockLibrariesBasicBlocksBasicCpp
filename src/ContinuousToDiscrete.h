@@ -21,15 +21,15 @@ namespace BlockLibraries::BasicBlocksBasicCpp
             double sampleTimeValue = std::numeric_limits<double>::quiet_NaN();
             double simulationStartTime = std::numeric_limits<double>::quiet_NaN();
         public:
-            ContinuousToDiscrete(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler);
+            ContinuousToDiscrete(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler, int inputPortNumber, int outputPortNumber);
 
             std::vector<T> ComputeOutputsOfCppBlock(const std::vector<T> inputs, std::shared_ptr<PySysLinkBase::SampleTime> sampleTime, double currentTime, bool isMinorStep=false) override;
             const std::vector<double> GetKnownEvents(const std::shared_ptr<PySysLinkBase::SampleTime> resolvedSampleTime, double simulationStartTime, double simulationEndTime) const override;
     };
 
     template <typename T>
-    ContinuousToDiscrete<T>::ContinuousToDiscrete(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler) 
-        : BlockTypeSupports::BasicCppSupport::SimulationBlockCpp<T>(configurationValues, eventHandler, 1, 1, {true})
+    ContinuousToDiscrete<T>::ContinuousToDiscrete(std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler, int inputPortNumber, int outputPortNumber)
+        : BlockTypeSupports::BasicCppSupport::SimulationBlockCpp<T>(configurationValues, eventHandler, inputPortNumber, outputPortNumber, true)
     {
         std::vector<std::shared_ptr<PySysLinkBase::SampleTime>> multirateSampleTimes = {};
         int inputMultirateSampleTimeIndex = 0;
