@@ -37,10 +37,10 @@ blockLibraries:
         configurationValues:
           - name: InitialValue
             defaultValue: 0
-            type: float
+            type: DataType
           - name: SampleTime
             defaultValue: 1
-            type: float
+            type: DataType
         inputPortNumber: 1
         outputPortNumber: 1
       - name: Adder
@@ -50,7 +50,7 @@ blockLibraries:
             defaultValue:
             - 1
             - 1
-            type: float[]
+            type: DataType[]
         inputPortNumber: length(Gains)
         outputPortNumber: 1
         renderInformation:
@@ -61,7 +61,7 @@ blockLibraries:
         configurationValues:
           - name: Value
             defaultValue: 1
-            type: float
+            type: DataType
         inputPortNumber: 0
         outputPortNumber: 1
       - name: ContinuousToDiscrete
@@ -72,7 +72,7 @@ blockLibraries:
             type: int
           - name: DiscreteSampleTime
             defaultValue: 1.0
-            type: float
+            type: double
         inputPortNumber: 1
         outputPortNumber: 1
       - name: Display
@@ -83,7 +83,7 @@ blockLibraries:
         configurationValues:
           - name: InitialValue
             defaultValue: 0
-            type: float
+            type: double
           - name: ContinuousSampleTimeGroup
             defaultValue: 1
             type: int
@@ -102,7 +102,7 @@ blockLibraries:
         configurationValues:
           - name: Gain 
             defaultValue: 1
-            type: float
+            type: DataType
         inputPortNumber: 1
         outputPortNumber: 1
         renderInformation:
