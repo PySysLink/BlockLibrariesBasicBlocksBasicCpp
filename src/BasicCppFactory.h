@@ -12,6 +12,7 @@
 #include <PySysLinkBase/ConfigurationValue.h>
 #include <BlockTypeSupports/BasicCppSupport/IBasicCppBlockFactory.h>
 #include <iostream>
+#include <PySysLinkBase/FullySupportedSignalValue.h>
 
 #include "Constant.h"
 #include "Adder.h"
@@ -43,19 +44,19 @@ namespace BlockLibraries::BasicBlocksBasicCpp
                         return std::make_unique<Display<T>>(cfg, handler, inputPortAmmount, outputPortAmmount);
 
                   if (blockClass == "BasicBlocks/Accumulator")
-                        return std::make_unique<Accumulator<T>>(cfg, handler, inputPortAmmount, outputPortAmmount);
+                        if constexpr (std::is_arithmetic_v<T> || std::is_same_v<T, std::complex<double>>) {
+                              return std::make_unique<Accumulator<T>>(cfg, handler, inputPortAmmount, outputPortAmmount);
+                        }
+                        else {
+                              throw std::invalid_argument("Accumulator does not support matrixes.");
+                        }
 
                   if (blockClass == "BasicBlocks/ContinuousToDiscrete")
                         return std::make_unique<ContinuousToDiscrete<T>>(cfg, handler, inputPortAmmount, outputPortAmmount);
 
                   if (blockClass == "BasicBlocks/Gain")
-                        if constexpr (std::is_same_v<T, double>) {
-                              return std::make_unique<Gain<double>>(cfg, handler, inputPortAmmount, outputPortAmmount);
-                        }
-                        else if constexpr (std::is_same_v<T, int>) {
-                              return std::make_unique<Gain<int>>(cfg, handler, inputPortAmmount, outputPortAmmount);
-                        } else if constexpr (std::is_same_v<T, std::complex<double>>) {
-                              return std::make_unique<Gain<std::complex<double>>>(cfg, handler, inputPortAmmount, outputPortAmmount);
+                        if constexpr (!(std::is_same_v<T, bool> || std::is_same_v<T, PySysLinkBase::BoolMatrix>)) {
+                              return std::make_unique<Gain<T>>(cfg, handler, inputPortAmmount, outputPortAmmount);
                         } else {
                               throw std::invalid_argument("Gain does not support bool.");
                         }
@@ -107,6 +108,22 @@ namespace BlockLibraries::BasicBlocksBasicCpp
                   else if (dataType == "bool")
                   {
                         return CreateBlockTyped<bool>(blockClass, blockConfiguration, blockEventsHandler, inputPortAmmount, outputPortAmmount);
+                  }
+                  else if (dataType == "matrix<int>")
+                  {
+                        return CreateBlockTyped<PySysLinkBase::IntMatrix>(blockClass, blockConfiguration, blockEventsHandler, inputPortAmmount, outputPortAmmount);
+                  }
+                  else if (dataType == "matrix<double>")
+                  {
+                        return CreateBlockTyped<PySysLinkBase::DoubleMatrix>(blockClass, blockConfiguration, blockEventsHandler, inputPortAmmount, outputPortAmmount);
+                  }
+                  else if (dataType == "matrix<bool>")
+                  {
+                        return CreateBlockTyped<PySysLinkBase::BoolMatrix>(blockClass, blockConfiguration, blockEventsHandler, inputPortAmmount, outputPortAmmount);
+                  }
+                  else if (dataType == "matrix<complex_double>")
+                  {
+                        return CreateBlockTyped<PySysLinkBase::ComplexMatrix>(blockClass, blockConfiguration, blockEventsHandler, inputPortAmmount, outputPortAmmount);
                   }
                   // else if (dataType == "string")
                   // {

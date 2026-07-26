@@ -53,6 +53,7 @@ blockLibraries:
             type: DataType[]
         inputPortNumber: length(Gains)
         outputPortNumber: 1
+        inputPortLabels: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N']
         renderInformation:
           blockShape: circle
 

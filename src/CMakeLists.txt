@@ -7,6 +7,11 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 target_include_directories(BlockLibrariesBasicBlocksBasicCpp PRIVATE ${CMAKE_SOURCE_DIR}/src)
 
+# -------------------------------------------------------------------
+# Eigen3 (system)
+# -------------------------------------------------------------------
+find_package(Eigen3 REQUIRED NO_MODULE)
+target_link_libraries(BlockLibrariesBasicBlocksBasicCpp PRIVATE Eigen3::Eigen)
 
 set_target_properties(BlockLibrariesBasicBlocksBasicCpp PROPERTIES 
     POSITION_INDEPENDENT_CODE ON
