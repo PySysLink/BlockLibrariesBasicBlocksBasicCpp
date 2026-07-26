@@ -39,10 +39,11 @@ namespace BlockLibraries::BasicBlocksBasicCpp
     template <typename T>
     std::vector<T> Adder<T>::ComputeOutputsOfCppBlock(const std::vector<T> inputs, std::shared_ptr<PySysLinkBase::SampleTime> sampleTime, double currentTime, bool isMinorStep)
     {
-        T sumation = T{};
-        for (size_t i = 0; i < this->gains.size(); ++i)
+        T sumation = inputs[0] * gains[0];
+
+        for (size_t i = 1; i < inputs.size(); ++i)
         {
-            sumation += inputs[i] * this->gains[i];
+            sumation += inputs[i] * gains[i];
         }
         return {sumation};
     }
