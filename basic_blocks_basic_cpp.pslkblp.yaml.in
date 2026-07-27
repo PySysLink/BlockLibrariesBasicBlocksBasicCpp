@@ -172,4 +172,4 @@ blockLibraries:
             signal_value_type: matrix<DataType>
             inheritance_group: 1
         inputPortLabels:
-          expression: '[f"{r},{c}" for r in range(Rows) for c in range(Columns)]'
+          generator: '[f"{r},{c}" for r in range(Rows) for c in range(Columns)]'
