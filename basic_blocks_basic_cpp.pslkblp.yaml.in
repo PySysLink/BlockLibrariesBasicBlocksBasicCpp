@@ -143,7 +143,7 @@ blockLibraries:
         renderInformation:
           blockShape: triangle
 
-      - name: BuildMatrix
+      - name: PackMatrix
         configurationValues:
           - name: DataTypeCategory
             defaultValue: FullySupportedSignalValue
@@ -172,4 +172,35 @@ blockLibraries:
             signal_value_type: matrix<DataType>
             inheritance_group: 1
         inputPortLabels:
+          generator: '[f"{r},{c}" for r in range(Rows) for c in range(Columns)]'
+
+      - name: UnpackMatrix
+        configurationValues:
+          - name: DataTypeCategory
+            defaultValue: FullySupportedSignalValue
+            type: options(Inherited, FullySupportedSignalValue)
+          - name: DataType
+            defaultValue: double
+            type: enum(FullySupportedSignalValueType)
+          - name: Rows
+            defaultValue: 2
+            type: int
+          - name: Columns
+            defaultValue: 2
+            type: int
+        inputPortNumber: 1
+        outputPortNumber: Rows * Columns
+        inputPortTypes:
+          all:
+            port_category: DataTypeCategory
+            signal_value_type: matrix<DataType>
+            inheritance_group: 1
+        outputPortTypes:
+          all:
+            port_category: FullySupportedSignalValue
+            signal_value_type: DataType
+            supported_port_types_for_inheritance:
+              - FullySupportedSignalValueType.Any
+            inheritance_group: 0
+        outputPortLabels:
           generator: '[f"{r},{c}" for r in range(Rows) for c in range(Columns)]'

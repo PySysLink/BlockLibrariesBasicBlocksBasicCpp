@@ -12,7 +12,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
 {
 
 template<typename T>
-class BuildMatrix
+class PackMatrix
     : public BlockTypeSupports::BasicCppSupport::SimulationBlockCpp<
           T,
           Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic>>
@@ -27,7 +27,7 @@ private:
 
 public:
 
-    BuildMatrix(
+    PackMatrix(
         std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues,
         std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler,
         int inputPortNumber,
@@ -42,7 +42,7 @@ public:
 
 
 template<typename T>
-BuildMatrix<T>::BuildMatrix(
+PackMatrix<T>::PackMatrix(
     std::map<std::string, PySysLinkBase::ConfigurationValue> configurationValues,
     std::shared_ptr<PySysLinkBase::IBlockEventsHandler> eventHandler,
     int inputPortNumber,
@@ -77,7 +77,7 @@ BuildMatrix<T>::BuildMatrix(
 
 template<typename T>
 std::vector<Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic>>
-BuildMatrix<T>::ComputeOutputsOfCppBlock(
+PackMatrix<T>::ComputeOutputsOfCppBlock(
     const std::vector<T> inputs,
     std::shared_ptr<PySysLinkBase::SampleTime>,
     double,
@@ -87,7 +87,7 @@ BuildMatrix<T>::ComputeOutputsOfCppBlock(
 
     if (static_cast<int>(inputs.size()) != rows * cols)
         throw std::runtime_error(
-            "BuildMatrix: number of inputs does not match Rows*Columns.");
+            "PackMatrix: number of inputs does not match Rows*Columns.");
 
     int k = 0;
 

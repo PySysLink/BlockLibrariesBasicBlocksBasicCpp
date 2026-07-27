@@ -22,7 +22,8 @@
 #include "Gain.h"
 #include "Integrator.h" 
 #include "ContinuousStateSpaceSISO.h"
-#include "BuildMatrix.h"
+#include "PackMatrix.h"
+#include "UnpackMatrix.h"
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
@@ -81,9 +82,13 @@ namespace BlockLibraries::BasicBlocksBasicCpp
 
                         return std::make_unique<ContinuousStateSpaceSISO>(cfg, handler, inputPortAmount, outputPortAmount);
                   }
-                  if (blockClass == "BasicBlocks/BuildMatrix")
+                  if (blockClass == "BasicBlocks/PackMatrix")
                   {
-                        return std::make_unique<BuildMatrix<I>>(cfg, handler, inputPortAmount, outputPortAmount);
+                        return std::make_unique<PackMatrix<I>>(cfg, handler, inputPortAmount, outputPortAmount);
+                  }
+                  if (blockClass == "BasicBlocks/UnpackMatrix")
+                  {
+                        return std::make_unique<UnpackMatrix<O>>(cfg, handler, inputPortAmount, outputPortAmount);
                   }
 
                   throw std::out_of_range("Block type not found: " + blockClass);
@@ -131,7 +136,8 @@ namespace BlockLibraries::BasicBlocksBasicCpp
                         "BasicBlocks/Gain",
                         "BasicBlocks/Integrator",
                         "BasicBlocks/ContinuousStateSpaceSISO",
-                        "BasicBlocks/BuildMatrix"
+                        "BasicBlocks/PackMatrix",
+                        "BasicBlocks/UnpackMatrix"
                   };
             }
 
