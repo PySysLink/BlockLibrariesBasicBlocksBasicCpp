@@ -98,6 +98,39 @@ blockLibraries:
           all: 
             port_category: FullySupportedSignalValue
             signal_value_type: double
+      
+      - name: ContinuousStateSpaceSISO
+        configurationValues:
+          - name: A
+            defaultValue: "[[0.0]]"
+            type: matrix<double>
+          - name: B
+            defaultValue: "[[1.0]]"
+            type: matrix<double>
+          - name: C
+            defaultValue: "[[1.0]]"
+            type: matrix<double>
+          - name: D
+            defaultValue: 0.0
+            type: double
+          - name: InitialState
+            defaultValue:
+              - 0
+            type: double[]
+          - name: ContinuousSampleTimeGroup
+            defaultValue: 1
+            type: int
+        inputPortNumber: 1
+        inputPortTypes:
+          all:
+            port_category: FullySupportedSignalValue
+            signal_value_type: double
+        outputPortNumber: 1
+        outputPortTypes:
+          all:
+            port_category: FullySupportedSignalValue
+            signal_value_type: double
+
       - name: Gain
         commonBlock: TypedBlock
         configurationValues:

@@ -21,6 +21,7 @@
 #include "ContinuousToDiscrete.h"
 #include "Gain.h"
 #include "Integrator.h" 
+#include "ContinuousStateSpaceSISO.h"
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
@@ -70,6 +71,15 @@ namespace BlockLibraries::BasicBlocksBasicCpp
 
                         return std::make_unique<Integrator<double>>(cfg, handler, inputPortAmmount, outputPortAmmount);
                   }
+                  if (blockClass == "BasicBlocks/ContinuousStateSpaceSISO")
+                  {
+                        if constexpr (!std::is_same_v<T, double>)
+                        {
+                              throw std::invalid_argument("ContinuousStateSpaceSISO only supports double.");
+                        }
+
+                        return std::make_unique<ContinuousStateSpaceSISO>(cfg, handler, inputPortAmmount, outputPortAmmount);
+                  }
 
                   throw std::out_of_range("Block type not found: " + blockClass);
             }
@@ -84,7 +94,8 @@ namespace BlockLibraries::BasicBlocksBasicCpp
                         "BasicBlocks/Accumulator",
                         "BasicBlocks/ContinuousToDiscrete",
                         "BasicBlocks/Gain",
-                        "BasicBlocks/Integrator"
+                        "BasicBlocks/Integrator",
+                        "BasicBlocks/ContinuousStateSpaceSISO"
                   };
             }
 
