@@ -22,6 +22,7 @@
 #include "Gain.h"
 #include "Integrator.h" 
 #include "ContinuousStateSpaceSISO.h"
+#include "BuildMatrix.h"
 
 namespace BlockLibraries::BasicBlocksBasicCpp
 {
@@ -32,56 +33,90 @@ namespace BlockLibraries::BasicBlocksBasicCpp
 
            
 
-            template <typename T>
-            std::unique_ptr<PySysLinkBase::ISimulationBlock> CreateBlockTyped(const std::string& blockClass, const ConfigMap& cfg, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> handler, int inputPortAmmount, int outputPortAmmount)
+            template <typename I, typename O>
+            std::unique_ptr<PySysLinkBase::ISimulationBlock> CreateBlockTyped(const std::string& blockClass, const ConfigMap& cfg, std::shared_ptr<PySysLinkBase::IBlockEventsHandler> handler, int inputPortAmount, int outputPortAmount)
             {
                   if (blockClass == "BasicBlocks/Constant")
-                        return std::make_unique<Constant<T>>(cfg, handler, inputPortAmmount, outputPortAmmount);
+                        return std::make_unique<Constant<I>>(cfg, handler, inputPortAmount, outputPortAmount);
 
                   if (blockClass == "BasicBlocks/Adder")
-                        return std::make_unique<Adder<T>>(cfg, handler, inputPortAmmount, outputPortAmmount);
+                        return std::make_unique<Adder<I>>(cfg, handler, inputPortAmount, outputPortAmount);
 
                   if (blockClass == "BasicBlocks/Display")
-                        return std::make_unique<Display<T>>(cfg, handler, inputPortAmmount, outputPortAmmount);
+                        return std::make_unique<Display<I>>(cfg, handler, inputPortAmount, outputPortAmount);
 
                   if (blockClass == "BasicBlocks/Accumulator")
-                        if constexpr (std::is_arithmetic_v<T> || std::is_same_v<T, std::complex<double>>) {
-                              return std::make_unique<Accumulator<T>>(cfg, handler, inputPortAmmount, outputPortAmmount);
+                        if constexpr (std::is_arithmetic_v<I> || std::is_same_v<I, std::complex<double>>) {
+                              return std::make_unique<Accumulator<I>>(cfg, handler, inputPortAmount, outputPortAmount);
                         }
                         else {
                               throw std::invalid_argument("Accumulator does not support matrixes.");
                         }
 
                   if (blockClass == "BasicBlocks/ContinuousToDiscrete")
-                        return std::make_unique<ContinuousToDiscrete<T>>(cfg, handler, inputPortAmmount, outputPortAmmount);
+                        return std::make_unique<ContinuousToDiscrete<I>>(cfg, handler, inputPortAmount, outputPortAmount);
 
                   if (blockClass == "BasicBlocks/Gain")
-                        if constexpr (!(std::is_same_v<T, bool> || std::is_same_v<T, PySysLinkBase::BoolMatrix>)) {
-                              return std::make_unique<Gain<T>>(cfg, handler, inputPortAmmount, outputPortAmmount);
+                        if constexpr (!(std::is_same_v<I, bool> || std::is_same_v<I, PySysLinkBase::BoolMatrix>)) {
+                              return std::make_unique<Gain<I>>(cfg, handler, inputPortAmount, outputPortAmount);
                         } else {
                               throw std::invalid_argument("Gain does not support bool.");
                         }
 
                   if (blockClass == "BasicBlocks/Integrator")
                   {
-                        if constexpr (!std::is_same_v<T, double>)
+                        if constexpr (!std::is_same_v<I, double>)
                         {
                               throw std::invalid_argument("Integrator only supports double.");
                         }
 
-                        return std::make_unique<Integrator<double>>(cfg, handler, inputPortAmmount, outputPortAmmount);
+                        return std::make_unique<Integrator<double>>(cfg, handler, inputPortAmount, outputPortAmount);
                   }
                   if (blockClass == "BasicBlocks/ContinuousStateSpaceSISO")
                   {
-                        if constexpr (!std::is_same_v<T, double>)
+                        if constexpr (!std::is_same_v<I, double>)
                         {
                               throw std::invalid_argument("ContinuousStateSpaceSISO only supports double.");
                         }
 
-                        return std::make_unique<ContinuousStateSpaceSISO>(cfg, handler, inputPortAmmount, outputPortAmmount);
+                        return std::make_unique<ContinuousStateSpaceSISO>(cfg, handler, inputPortAmount, outputPortAmount);
+                  }
+                  if (blockClass == "BasicBlocks/BuildMatrix")
+                  {
+                        return std::make_unique<BuildMatrix<I>>(cfg, handler, inputPortAmount, outputPortAmount);
                   }
 
                   throw std::out_of_range("Block type not found: " + blockClass);
+            }
+
+            template<typename F>
+            auto DispatchType(const std::string& type, F&& f)
+            {
+                  if (type == "int")
+                        return f.template operator()<int>();
+
+                  if (type == "double")
+                        return f.template operator()<double>();
+
+                  if (type == "complex_double")
+                        return f.template operator()<std::complex<double>>();
+
+                  if (type == "bool")
+                        return f.template operator()<bool>();
+
+                  if (type == "matrix<int>")
+                        return f.template operator()<PySysLinkBase::IntMatrix>();
+
+                  if (type == "matrix<double>")
+                        return f.template operator()<PySysLinkBase::DoubleMatrix>();
+
+                  if (type == "matrix<bool>")
+                        return f.template operator()<PySysLinkBase::BoolMatrix>();
+
+                  if (type == "matrix<complex_double>")
+                        return f.template operator()<PySysLinkBase::ComplexMatrix>();
+
+                  throw std::invalid_argument("Unsupported type: " + type);
             }
 
       public:
@@ -95,55 +130,28 @@ namespace BlockLibraries::BasicBlocksBasicCpp
                         "BasicBlocks/ContinuousToDiscrete",
                         "BasicBlocks/Gain",
                         "BasicBlocks/Integrator",
-                        "BasicBlocks/ContinuousStateSpaceSISO"
+                        "BasicBlocks/ContinuousStateSpaceSISO",
+                        "BasicBlocks/BuildMatrix"
                   };
             }
 
             
             std::unique_ptr<PySysLinkBase::ISimulationBlock> CreateBlock(std::string blockClass, std::map<std::string, PySysLinkBase::ConfigurationValue> blockConfiguration, 
                                                                          std::shared_ptr<PySysLinkBase::IBlockEventsHandler> blockEventsHandler,
-                                                                         std::string dataType, int inputPortAmmount, int outputPortAmmount) override
+                                                                         std::string inputDataType, std::string outputDataType, int inputPortAmount, int outputPortAmount) override
             {
-                  if (dataType == "int")
+                  return DispatchType(inputDataType, [&]<typename I>()
                   {
-                        return CreateBlockTyped<int>(blockClass, blockConfiguration, blockEventsHandler, inputPortAmmount, outputPortAmmount);
-                  }
-                  else if (dataType == "double")
-                  {
-                        return CreateBlockTyped<double>(blockClass, blockConfiguration, blockEventsHandler, inputPortAmmount, outputPortAmmount);
-                  }
-                  else if (dataType == "complex_double")
-                  {
-                        return CreateBlockTyped<std::complex<double>>(blockClass, blockConfiguration, blockEventsHandler, inputPortAmmount, outputPortAmmount);
-                  }
-                  else if (dataType == "bool")
-                  {
-                        return CreateBlockTyped<bool>(blockClass, blockConfiguration, blockEventsHandler, inputPortAmmount, outputPortAmmount);
-                  }
-                  else if (dataType == "matrix<int>")
-                  {
-                        return CreateBlockTyped<PySysLinkBase::IntMatrix>(blockClass, blockConfiguration, blockEventsHandler, inputPortAmmount, outputPortAmmount);
-                  }
-                  else if (dataType == "matrix<double>")
-                  {
-                        return CreateBlockTyped<PySysLinkBase::DoubleMatrix>(blockClass, blockConfiguration, blockEventsHandler, inputPortAmmount, outputPortAmmount);
-                  }
-                  else if (dataType == "matrix<bool>")
-                  {
-                        return CreateBlockTyped<PySysLinkBase::BoolMatrix>(blockClass, blockConfiguration, blockEventsHandler, inputPortAmmount, outputPortAmmount);
-                  }
-                  else if (dataType == "matrix<complex_double>")
-                  {
-                        return CreateBlockTyped<PySysLinkBase::ComplexMatrix>(blockClass, blockConfiguration, blockEventsHandler, inputPortAmmount, outputPortAmmount);
-                  }
-                  // else if (dataType == "string")
-                  // {
-                  //       return CreateBlockTyped<std::string>(blockClass, blockConfiguration, blockEventsHandler);
-                  // }
-                  else
-                  {
-                        throw std::invalid_argument("Unsupported DataType: " + dataType);
-                  }
+                        return DispatchType(outputDataType, [&]<typename O>()
+                        {
+                              return CreateBlockTyped<I, O>(
+                                    blockClass,
+                                    blockConfiguration,
+                                    blockEventsHandler,
+                                    inputPortAmount,
+                                    outputPortAmount);
+                        });
+                  }); 
             }
       };
 } // namespace BlockLibraries::BasicBlocksBasicCpp

@@ -142,3 +142,48 @@ blockLibraries:
         renderInformation:
           blockShape: triangle
 
+      - name: BuildMatrix
+        configurationValues:
+          - name: DataTypeCategory
+            defaultValue: FullySupportedSignalValue
+            type: options(Inherited, FullySupportedSignalValue)
+          - name: DataType
+            defaultValue: double
+            type: enum(FullySupportedSignalValueType)
+          - name: Rows
+            defaultValue: 2
+            type: int
+          - name: Columns
+            defaultValue: 2
+            type: int
+        inputPortNumber: Rows * Columns
+        outputPortNumber: 1
+        inputPortTypes:
+          all:
+            port_category: DataTypeCategory
+            signal_value_type: DataType
+            supported_port_types_for_inheritance:
+              - FullySupportedSignalValueType.Any
+            inheritance_group: 0
+        outputPortTypes:
+          all:
+            port_category: FullySupportedSignalValue
+            signal_value_type: matrix<DataType>
+            inheritance_group: 1
+        inputPortLabels:
+          - "0,0"
+          - "0,1"
+          - "0,2"
+          - "0,3"
+          - "1,0"
+          - "1,1"
+          - "1,2"
+          - "1,3"
+          - "2,0"
+          - "2,1"
+          - "2,2"
+          - "2,3"
+          - "3,0"
+          - "3,1"
+          - "3,2"
+          - "3,3" 
