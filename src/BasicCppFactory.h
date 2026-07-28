@@ -20,6 +20,7 @@
 #include "Accumulator.h"
 #include "ContinuousToDiscrete.h"
 #include "Gain.h"
+#include "Saturation.h"
 #include "Integrator.h" 
 #include "ContinuousStateSpaceSISO.h"
 #include "ContinuousStateSpaceMIMO.h"
@@ -64,6 +65,26 @@ namespace BlockLibraries::BasicBlocksBasicCpp
                         } else {
                               throw std::invalid_argument("Gain does not support bool.");
                         }
+                  if (blockClass == "BasicBlocks/Saturation")
+                  {
+                        if constexpr (
+                              std::is_same_v<I, int> ||
+                              std::is_same_v<I, double> ||
+                              std::is_same_v<I, PySysLinkBase::IntMatrix> ||
+                              std::is_same_v<I, PySysLinkBase::DoubleMatrix>)
+                        {
+                              return std::make_unique<Saturation<I>>(
+                                    cfg,
+                                    handler,
+                                    inputPortAmount,
+                                    outputPortAmount);
+                        }
+                        else
+                        {
+                              throw std::invalid_argument(
+                                    "Saturation only supports int, double, matrix<int> and matrix<double>.");
+                        }
+                  }
 
                   if (blockClass == "BasicBlocks/Integrator")
                   {
@@ -144,6 +165,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
                         "BasicBlocks/Accumulator",
                         "BasicBlocks/ContinuousToDiscrete",
                         "BasicBlocks/Gain",
+                        "BasicBlocks/Saturation",
                         "BasicBlocks/Integrator",
                         "BasicBlocks/ContinuousStateSpaceSISO",
                         "BasicBlocks/ContinuousStateSpaceMIMO",
