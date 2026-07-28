@@ -99,7 +99,18 @@ blockLibraries:
           all: 
             port_category: FullySupportedSignalValue
             signal_value_type: double
-      
+
+      - name: Gain
+        commonBlock: TypedBlock
+        configurationValues:
+          - name: Gain 
+            defaultValue: 1
+            type: DataType
+        inputPortNumber: 1
+        outputPortNumber: 1
+        renderInformation:
+          blockShape: triangle
+
       - name: ContinuousStateSpaceSISO
         configurationValues:
           - name: A
@@ -132,16 +143,37 @@ blockLibraries:
             port_category: FullySupportedSignalValue
             signal_value_type: double
 
-      - name: Gain
-        commonBlock: TypedBlock
+      - name: ContinuousStateSpaceMIMO
         configurationValues:
-          - name: Gain 
+          - name: A
+            defaultValue: "[[0.0]]"
+            type: matrix<double>
+          - name: B
+            defaultValue: "[[1.0]]"
+            type: matrix<double>
+          - name: C
+            defaultValue: "[[1.0]]"
+            type: matrix<double>
+          - name: D
+            defaultValue: "[[1.0]]"
+            type: matrix<double>
+          - name: InitialState
+            defaultValue:
+              - 0
+            type: double[]
+          - name: ContinuousSampleTimeGroup
             defaultValue: 1
-            type: DataType
+            type: int
         inputPortNumber: 1
+        inputPortTypes:
+          all:
+            port_category: FullySupportedSignalValue
+            signal_value_type: matrix<double>
         outputPortNumber: 1
-        renderInformation:
-          blockShape: triangle
+        outputPortTypes:
+          all:
+            port_category: FullySupportedSignalValue
+            signal_value_type: matrix<double>
 
       - name: PackMatrix
         configurationValues:

@@ -22,6 +22,7 @@
 #include "Gain.h"
 #include "Integrator.h" 
 #include "ContinuousStateSpaceSISO.h"
+#include "ContinuousStateSpaceMIMO.h"
 #include "PackMatrix.h"
 #include "UnpackMatrix.h"
 
@@ -82,6 +83,15 @@ namespace BlockLibraries::BasicBlocksBasicCpp
 
                         return std::make_unique<ContinuousStateSpaceSISO>(cfg, handler, inputPortAmount, outputPortAmount);
                   }
+                  if (blockClass == "BasicBlocks/ContinuousStateSpaceMIMO")
+                  {
+                        if constexpr (!std::is_same_v<I, Eigen::MatrixXd>)
+                        {
+                              throw std::invalid_argument("ContinuousStateSpaceMIMO only supports matrix<double>.");
+                        }
+
+                        return std::make_unique<ContinuousStateSpaceMIMO>(cfg, handler, inputPortAmount, outputPortAmount);
+                  }
                   if (blockClass == "BasicBlocks/PackMatrix")
                   {
                         return std::make_unique<PackMatrix<I>>(cfg, handler, inputPortAmount, outputPortAmount);
@@ -136,6 +146,7 @@ namespace BlockLibraries::BasicBlocksBasicCpp
                         "BasicBlocks/Gain",
                         "BasicBlocks/Integrator",
                         "BasicBlocks/ContinuousStateSpaceSISO",
+                        "BasicBlocks/ContinuousStateSpaceMIMO",
                         "BasicBlocks/PackMatrix",
                         "BasicBlocks/UnpackMatrix"
                   };

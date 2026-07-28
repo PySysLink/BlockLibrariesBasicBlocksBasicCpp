@@ -1,5 +1,5 @@
-#ifndef SRC_STATE_SPACE
-#define SRC_STATE_SPACE
+#ifndef SRC_STATE_SPACE_SISO
+#define SRC_STATE_SPACE_SISO
 
 #include <Eigen/Dense>
 #include <BlockTypeSupports/BasicCppSupport/SimulationBlockCppWithContinuousStates.h>
@@ -154,4 +154,4 @@ ContinuousStateSpaceSISO::GetContinuousStateDerivativesOfCppBlock(
 
 }
 
-#endif
+#endif // SRC_STATE_SPACE_SISO
