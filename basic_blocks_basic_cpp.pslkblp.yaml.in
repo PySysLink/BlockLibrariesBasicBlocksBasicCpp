@@ -111,6 +111,18 @@ blockLibraries:
         renderInformation:
           blockShape: triangle
 
+      - name: Saturation
+        commonBlock: TypedBlock
+        configurationValues:
+          - name: UpperSaturation 
+            defaultValue: 1
+            type: DataType
+          - name: LowerSaturation 
+            defaultValue: 1
+            type: DataType
+        inputPortNumber: 1
+        outputPortNumber: 1
+        
       - name: ContinuousStateSpaceSISO
         configurationValues:
           - name: A
