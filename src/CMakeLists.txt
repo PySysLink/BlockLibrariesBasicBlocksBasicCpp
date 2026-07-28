@@ -7,6 +7,14 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 target_include_directories(BlockLibrariesBasicBlocksBasicCpp PRIVATE ${CMAKE_SOURCE_DIR}/src)
 
+
+find_package(BlockTypeSupportsBasicCppSupport REQUIRED)
+
+target_link_libraries(BlockLibrariesBasicBlocksBasicCpp
+    PRIVATE
+        BlockTypeSupports::BasicCppSupport::BlockTypeSupportsBasicCppSupport
+)
+
 # -------------------------------------------------------------------
 # Eigen3 (system)
 # -------------------------------------------------------------------
