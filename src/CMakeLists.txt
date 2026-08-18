@@ -35,3 +35,8 @@ target_include_directories(BlockLibrariesBasicBlocksBasicCpp
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>  # Include path for the build tree
         $<INSTALL_INTERFACE:include>                   # Include path for the installed tree
 )
+
+target_link_options(BlockLibrariesBasicBlocksBasicCpp PRIVATE
+    -static-libstdc++
+    -static-libgcc
+)
