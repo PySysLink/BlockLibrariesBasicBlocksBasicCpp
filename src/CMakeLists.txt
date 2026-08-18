@@ -29,6 +29,22 @@ set_target_properties(BlockLibrariesBasicBlocksBasicCpp PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
 )
 
+# -------------------------------------------------------------------
+# Filesystem
+# -------------------------------------------------------------------
+
+# only if GCC version is 8 or lower, we need to link with stdc++fs for filesystem support
+
+IF (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    EXECUTE_PROCESS(
+        COMMAND ${CMAKE_CXX_COMPILER} -dumpversion
+        OUTPUT_VARIABLE GCC_VERSION
+    )
+    if (GCC_VERSION VERSION_LESS 9)
+        target_link_libraries(BlockLibrariesBasicBlocksBasicCpp PRIVATE stdc++fs)
+    endif()
+endif()
+
 # Include directories for header files
 target_include_directories(BlockLibrariesBasicBlocksBasicCpp
     PUBLIC
