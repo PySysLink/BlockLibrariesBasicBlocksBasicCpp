@@ -39,7 +39,7 @@ blockLibraries:
             defaultValue: 0
             type: DataType
           - name: SampleTime
-            defaultValue: 1
+            defaultValue: -1
             type: DataType
         inputPortNumber: 1
         outputPortNumber: 1
@@ -73,7 +73,7 @@ blockLibraries:
             defaultValue: 1
             type: int
           - name: DiscreteSampleTime
-            defaultValue: 1.0
+            defaultValue: -1
             type: double
         inputPortNumber: 1
         outputPortNumber: 1

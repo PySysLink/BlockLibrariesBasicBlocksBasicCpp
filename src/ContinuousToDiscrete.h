@@ -48,7 +48,19 @@ namespace BlockLibraries::BasicBlocksBasicCpp
         try
         {
             this->sampleTimeValue = PySysLinkBase::ConfigurationValueManager::TryGetConfigurationValue<double>("DiscreteSampleTime", configurationValues);
-            multirateSampleTimes.push_back(std::make_shared<PySysLinkBase::SampleTime>(PySysLinkBase::SampleTimeType::discrete, this->sampleTimeValue));
+            if (this->sampleTimeValue <= 0 && this->sampleTimeValue != -1)
+            {
+                throw std::invalid_argument("DiscreteSampleTime must be greater than 0 or equal to -1 for inherited sample time.");
+            }
+            if (this->sampleTimeValue == -1)
+            {
+                multirateSampleTimes.push_back(std::make_shared<PySysLinkBase::SampleTime>(PySysLinkBase::SampleTimeType::inherited,
+                                                                            std::vector<PySysLinkBase::SampleTimeType>{PySysLinkBase::SampleTimeType::discrete}));
+            }
+            else
+            {
+                multirateSampleTimes.push_back(std::make_shared<PySysLinkBase::SampleTime>(PySysLinkBase::SampleTimeType::discrete, this->sampleTimeValue));
+            }
         }
         catch(const std::invalid_argument&)
         {
